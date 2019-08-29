@@ -34,7 +34,11 @@ public class PlatformGyro : MonoBehaviour
         if (!isGyroEnabled)
             return;
 
-        Debug.Log("Gyro Acceleration" + Input.gyro.userAcceleration.magnitude);
+        //Debug.Log("Gyro Acceleration" + Input.gyro.userAcceleration.magnitude);
+
+        // Shake amount is from 0 to 10
+        // multiply by 10 and divide by 100 to get 0 - 1 value
+        sliderRef.value = (shakeAmount * 10) / 100;
 
         // If shaking isnt on
         if (!canShake)
@@ -46,17 +50,17 @@ public class PlatformGyro : MonoBehaviour
         // if it reaches the shaking time, stop shaking
         if(timeElapsed >= shakingTime)
         {
+            // Reset
             canShake = false;
+            timeElapsed = 0;
+            
         }
 
         shakeAmount += Input.gyro.userAcceleration.magnitude * Time.deltaTime;
         // Clamp the value
         shakeAmount = Mathf.Clamp(shakeAmount, 0, 10);
-        // Shake amount is from 0 to 10
-        // multiply by 10 and divide by 100 to get 0 - 1 value
-        sliderRef.value = (shakeAmount * 10) / 100;
 
-        Debug.Log("Shake Amount : " + shakeAmount);
+        //Debug.Log("Shake Amount : " + shakeAmount);
 
     }
 
@@ -76,5 +80,7 @@ public class PlatformGyro : MonoBehaviour
     public void enableShaking()
     {
         canShake = true;
+        // Reset shake amount
+        shakeAmount = 0.0f;
     }
 }
