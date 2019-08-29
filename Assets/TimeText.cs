@@ -1,24 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ShakedBox : MonoBehaviour
+public class TimeText : MonoBehaviour
 {
-    Rigidbody2D rigid;
-    Vector2 acc;
+    GyroRecorder recorder;
+    Text text;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigid = GetComponent<Rigidbody2D>();
+        text = GetComponent<Text>();
+        recorder = GetComponent<GyroRecorder>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        acc = (Vector2)Input.gyro.userAcceleration;
-        //acc *= .9f;
-
-        rigid.AddForce(acc * 100);
+        text.text = $"{recorder.time}";
     }
 }

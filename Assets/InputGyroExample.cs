@@ -1,34 +1,31 @@
 ﻿//Attach this script to a GameObject in your Scene.
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InputGyroExample : MonoBehaviour
 {
     private Text text;
 
-    private float minX;
-    private float maxX;
-    private float minY;
-    private float maxY;
-    private float minZ;
-    private float maxZ;
+    float time;
+    public float defaultTime = 30f;
+
+    private Bounds bounds;
 
     private void Start()
     {
         //Set up and enable the gyroscope (check your device has one)
         Input.gyro.enabled = true;
         text = GetComponent<Text>();
+        time = defaultTime;
     }
 
     private void Update()
     {
-        minX = Mathf.Min(minX, Input.gyro.userAcceleration.x);
-        maxX = Mathf.Max(maxX, Input.gyro.userAcceleration.x);
-        minY = Mathf.Min(minY, Input.gyro.userAcceleration.y);
-        maxY = Mathf.Max(maxY, Input.gyro.userAcceleration.y);
-        minZ = Mathf.Min(minZ, Input.gyro.userAcceleration.z);
-        maxZ = Mathf.Max(maxZ, Input.gyro.userAcceleration.z);
-        
+        time -= Time.deltaTime;
+
+        bounds.Encapsulate(Input.acceleration);
+
         //text.text = 
         //        "MinX " + minX + "\n" +
         //        "MaxX " + maxX + "\n" +
@@ -37,6 +34,13 @@ public class InputGyroExample : MonoBehaviour
         //        "MinZ " + minZ + "\n" +
         //        "MaxZ " + maxZ + "\n" +
         //        "";
+
+        text.text = bounds.extents.magnitude.ToString("F2") + "\nTime: " + time.ToString("F2");
+
+        if (time < 0)
+        {
+            //SceneManager.LoadScene("GameScene");
+        }
     }
 
     //This is a legacy function, check out the UI section for other ways to create your UI
@@ -46,11 +50,11 @@ public class InputGyroExample : MonoBehaviour
         //GUI.Label(new Rect(500, 300, 200, 40), "Gyro rotation rate " + Input.gyro.rotationRate);
         //GUI.Label(new Rect(500, 350, 200, 40), "Gyro attitude" + Input.gyro.attitude);
         //GUI.Label(new Rect(500, 400, 200, 40), "Gyro enabled : " + Input.gyro.enabled);
-        text.text = "Gyro rotation rate " + Input.gyro.rotationRate + "\n" +
-                "Gyro attitude" + Input.gyro.attitude + "\n" +
-                "Gyro enabled : " + Input.gyro.enabled + "\n" +
-                "Gyro Acceleration" + Input.gyro.userAcceleration + "\n" +
-                "Acceleration" + Input.acceleration + "\n" +
-                "";
+        //text.text = "Gyro rotation rate " + Input.gyro.rotationRate + "\n" +
+        //        "Gyro attitude" + Input.gyro.attitude + "\n" +
+        //        "Gyro enabled : " + Input.gyro.enabled + "\n" +
+        //        "Gyro Acceleration" + Input.gyro.userAcceleration + "\n" +
+        //        "Acceleration" + Input.acceleration + "\n" +
+        //        "";
     }
 }
