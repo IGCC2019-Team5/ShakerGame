@@ -21,10 +21,14 @@ public class PlatformGyro : MonoBehaviour
     // elapsed time
     float timeElapsed = 0.0f;
 
+    // Store phone rotation
+    Quaternion phoneRotation;
+
     // Start is called before the first frame update
     void Start()
     {
         isGyroEnabled = EnableGyro();
+        //phoneRotation = new Quaternion;
     }
 
     // Update is called once per frame
@@ -33,8 +37,6 @@ public class PlatformGyro : MonoBehaviour
         // If there isnt gyro, return
         if (!isGyroEnabled)
             return;
-
-        //Debug.Log("Gyro Acceleration" + Input.gyro.userAcceleration.magnitude);
 
         // Shake amount is from 0 to 10
         // multiply by 10 and divide by 100 to get 0 - 1 value
@@ -55,6 +57,11 @@ public class PlatformGyro : MonoBehaviour
             timeElapsed = 0;
             
         }
+        // Stores phone rotation
+        phoneRotation.w += Input.gyro.attitude.w * Time.deltaTime;
+        phoneRotation.x += Input.gyro.attitude.x * Time.deltaTime;
+        phoneRotation.y += Input.gyro.attitude.y * Time.deltaTime;
+        phoneRotation.z += Input.gyro.attitude.z * Time.deltaTime;
 
         shakeAmount += Input.gyro.userAcceleration.magnitude * Time.deltaTime;
         // Clamp the value
