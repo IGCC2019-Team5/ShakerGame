@@ -28,7 +28,7 @@ public class InputGyroExample : MonoBehaviour
         maxY = Mathf.Max(maxY, Input.gyro.userAcceleration.y);
         minZ = Mathf.Min(minZ, Input.gyro.userAcceleration.z);
         maxZ = Mathf.Max(maxZ, Input.gyro.userAcceleration.z);
-
+        
         //text.text = 
         //        "MinX " + minX + "\n" +
         //        "MaxX " + maxX + "\n" +
