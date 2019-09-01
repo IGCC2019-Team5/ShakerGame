@@ -6,13 +6,13 @@ namespace Shake
 {
     public struct ShakeFrame
     {
-        public readonly Vector3 translation;
-        public readonly Quaternion rotation;
+        public readonly Vector3 userAcceleration;
+        public readonly Quaternion attitude;
 
         public ShakeFrame(Vector3 translation, Quaternion rotation)
         {
-            this.translation = translation;
-            this.rotation = rotation;
+            this.userAcceleration = translation;
+            this.attitude = rotation;
         }
 
         public static ShakeFrame CreateFromGyro(Gyroscope gyro)

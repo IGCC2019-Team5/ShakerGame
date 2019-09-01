@@ -155,6 +155,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.github.IGCC2019Team5.ShakerGame
     Standalone: com.Company.ProductName
+    iOS: com.github.IGCC2019Team5.ShakerGame
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
