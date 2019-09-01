@@ -8,12 +8,10 @@ public class GyroRecorder : MonoBehaviour
 {
     public static Shake.ShakeMovie lastMovie = null;
 
-    public Slider sliderRef;
-
     // Shaking time
     public float shakingTime = 30;
     // elapsed time
-    float elapsedTime;
+    [System.NonSerialized] public float elapsedTime;
     // Stores how much the player shakes
     [System.NonSerialized] public float shakeAmount;
     // Store reference to Gyroscope
