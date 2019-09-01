@@ -10,10 +10,15 @@ public class GyroRecorder : MonoBehaviour
 
     // Shaking time
     public float shakingTime = 30;
+    // Shake Strength resistance
+    // Lower number makes it harder for the player shake
+    [Range(0.0f, 1.5f)]
+    public float shakeResistance;
+
     // elapsed time
     [System.NonSerialized] public float elapsedTime;
     // Stores how much the player shakes
-    [System.NonSerialized] public float shakeAmount;
+    [System.NonSerialized] public float shakeMagnitude;
     // Store reference to Gyroscope
     Gyroscope gyroRef;
     // boolean Check for shaking
@@ -51,9 +56,9 @@ public class GyroRecorder : MonoBehaviour
         movie.AddFrame(Shake.ShakeFrame.CreateFromGyro(Input.gyro));
 
         // Increment the shake amount based on the magnitude of acceleration
-        shakeAmount += gyroRef.userAcceleration.magnitude * Time.deltaTime;
+        shakeMagnitude += gyroRef.userAcceleration.magnitude * shakeResistance * Time.deltaTime;
         // Clamp the value
-        shakeAmount = Mathf.Clamp(shakeAmount, 0, 10);
+        shakeMagnitude = Mathf.Clamp(shakeMagnitude, 0, 10);
 
         if (elapsedTime > shakingTime)
         {
