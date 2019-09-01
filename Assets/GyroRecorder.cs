@@ -15,7 +15,7 @@ public class GyroRecorder : MonoBehaviour
     // elapsed time
     float elapsedTime;
     // Stores how much the player shakes
-    float shakeAmount;
+    [System.NonSerialized] public float shakeAmount;
     // Store reference to Gyroscope
     Gyroscope gyroRef;
     // boolean Check for shaking
@@ -49,7 +49,13 @@ public class GyroRecorder : MonoBehaviour
 
         elapsedTime += Time.deltaTime;
 
+        // Add the frames
         movie.AddFrame(Shake.ShakeFrame.CreateFromGyro(Input.gyro));
+
+        // Increment the shake amount based on the magnitude of acceleration
+        shakeAmount += gyroRef.userAcceleration.magnitude * Time.deltaTime;
+        // Clamp the value
+        shakeAmount = Mathf.Clamp(shakeAmount, 0, 10);
 
         if (elapsedTime > shakingTime)
         {
@@ -94,20 +100,20 @@ public class GyroRecorder : MonoBehaviour
         elapsedTime = 0;
     }
 
-    void UpdateSlider()
-    {
-        // if there isn't any slider reference
-        // return
-        if (sliderRef == null)
-            return;
+    //void UpdateSlider()
+    //{
+    //    // if there isn't any slider reference
+    //    // return
+    //    if (sliderRef == null)
+    //        return;
 
-        // Shake amount os from 0 to 10
-        // divide by 10 to get 0 to 1 values 
-        sliderRef.value = shakeAmount / 10;
+    //    // Shake amount os from 0 to 10
+    //    // divide by 10 to get 0 to 1 values 
+    //    sliderRef.value = shakeAmount / 10;
 
-        // Increment the shake amount based on the magnitude of acceleration
-        shakeAmount += gyroRef.userAcceleration.magnitude * Time.deltaTime;
-        // Clamp the value
-        shakeAmount = Mathf.Clamp(shakeAmount, 0, 10);
-    }
+    //    // Increment the shake amount based on the magnitude of acceleration
+    //    shakeAmount += gyroRef.userAcceleration.magnitude * Time.deltaTime;
+    //    // Clamp the value
+    //    shakeAmount = Mathf.Clamp(shakeAmount, 0, 10);
+    //}
 }
