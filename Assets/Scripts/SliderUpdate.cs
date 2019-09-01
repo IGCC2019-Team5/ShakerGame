@@ -7,6 +7,8 @@ public class SliderUpdate : MonoBehaviour
 {
     public Slider sliderRef;
 
+    public Text shakeText;
+
     GyroRecorder recorderRef;
 
 
@@ -21,6 +23,9 @@ public class SliderUpdate : MonoBehaviour
     void Update()
     {
         // if there isn't any slider reference
+
+        shakeText.text = $"Shake Amount : {recorderRef.shakeAmount}";
+
         // return
         if (sliderRef == null)
             return;

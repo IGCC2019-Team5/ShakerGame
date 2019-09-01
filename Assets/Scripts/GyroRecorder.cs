@@ -36,7 +36,7 @@ public class GyroRecorder : MonoBehaviour
         // If gryo isnt supported, return
         // if there isnt a recorded last movie, return
         // if there is then it successfully recorded the shake
-        if (!isGyroEnabled || lastMovie == null)
+        if (!isGyroEnabled || lastMovie != null)
             return;
 
         // Check to make sure it is shaking time

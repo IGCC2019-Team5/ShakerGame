@@ -18,6 +18,6 @@ public class TimeText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = $"{recorder.elapsedTime}";
+        text.text = $"Elapsed Time : {recorder.elapsedTime}";
     }
 }
