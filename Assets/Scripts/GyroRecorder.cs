@@ -61,7 +61,7 @@ public class GyroRecorder : MonoBehaviour
             lastMovie = movie.Build();
             // Need change this part
             // I dont think we should separate the scenes from shaking and playing
-            //SceneManager.LoadScene("PlayScene");
+            SceneManager.LoadScene("PlayScene");
         }
     }
 

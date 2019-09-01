@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d668d5b433ea24e86dfc0bd9f8b4bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakingTime: 30
+  shakingTime: 10
 --- !u!114 &269693458
 MonoBehaviour:
   m_ObjectHideFlags: 0
