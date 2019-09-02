@@ -48,4 +48,18 @@ namespace Shake
             return new ShakeMovie(frames);
         }
     }
+
+    public class ShakePower
+    {
+        float xPower, yPower;
+        float zRot;
+
+        public ShakePower(float _xPower, float _yPower, float _zRot)
+        {
+            xPower = _xPower;
+            yPower = _yPower;
+            zRot = _zRot;
+        }
+    }
+
 }

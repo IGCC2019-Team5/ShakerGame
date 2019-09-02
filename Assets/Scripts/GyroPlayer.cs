@@ -5,7 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GyroPlayer : MonoBehaviour
 {
+    public float shakeDuration = 5f;
+
     Shake.ShakeMovie playing;
+
+    Shake.ShakePower shakePower;
+
     Rigidbody2D target;
 
     // Start is called before the first frame update
