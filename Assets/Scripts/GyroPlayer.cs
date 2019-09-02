@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GyroPlayer : MonoBehaviour
 {
     public float shakeDuration = 5f;
+    public float rotationMultiplier = 2f;
     public Shake.ShakePower shakePower;
 
 
@@ -35,7 +36,7 @@ public class GyroPlayer : MonoBehaviour
 
             target.AddForce(frame.userAcceleration);
             target.AddTorque(deltaRotation);
-            Debug.Log($"Force:{frame.userAcceleration}, Torque:{deltaRotation}");
+            //Debug.Log($"Force:{frame.userAcceleration}, Torque:{deltaRotation}");
             yield return new WaitForFixedUpdate();
         }
 
@@ -56,10 +57,13 @@ public class GyroPlayer : MonoBehaviour
         {
             shakeMagnitude += playing.frames[i].userAcceleration.magnitude * Time.deltaTime;
             //zRotation += ((playing.frames[i].attitude.x + playing.frames[i].attitude.y + playing.frames[i].attitude.z) * Time.deltaTime);
-            zRotation += (playing.frames[i].attitude.eulerAngles.magnitude * Time.deltaTime);
+            zRotation += (playing.frames[i].attitude.eulerAngles.magnitude  * Time.deltaTime);
         }
-
+        // Divide by the total number of frames
+        // to get the average
         zRotation /= playing.frames.Count;
+        // Apply a multiplier to adjust
+        zRotation *= rotationMultiplier;
 
         // If there is any resistance
         // add it here
