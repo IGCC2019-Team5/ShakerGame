@@ -66,6 +66,16 @@ namespace UCharts
 			}
         }
 
+        public void ApplyData(List<float> data, bool immediately = false)
+        {
+            m_Data = data;
+            if (immediately)
+                for (var i = 0; i < m_DataDisplay.Count; ++i)
+                    m_DataDisplay[i] = m_Data[i];
+            else
+                PlayAnimation();
+        }
+
   		protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear();
