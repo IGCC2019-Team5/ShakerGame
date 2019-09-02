@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public struct Wave
 {
-    public float period;
+    public float freq;
     public float force;
 }
 
@@ -32,9 +32,9 @@ public class PlatformShake : MonoBehaviour
     void FixedUpdate()
     {
         t += Time.fixedDeltaTime;
-        float x = (Mathf.Sin(Mathf.PI * 2 * t / power.x.period)/* > 0 ? 1 : -1*/) * power.x.force;
-        float y = (Mathf.Sin(Mathf.PI * 2 * t / power.y.period)/* > 0 ? 1 : -1*/) * power.y.force;
-        float rotZ = (Mathf.Sin(Mathf.PI * 2 * t / power.rotZ.period)/* > 0 ? 1 : -1*/) * power.rotZ.force;
+        float x = (Mathf.Sin(Mathf.PI * 2 * power.x.freq * t)/* > 0 ? 1 : -1*/) * power.x.force;
+        float y = (Mathf.Sin(Mathf.PI * 2 * power.y.freq * t)/* > 0 ? 1 : -1*/) * power.y.force;
+        float rotZ = (Mathf.Sin(Mathf.PI * 2 * power.rotZ.freq * t)/* > 0 ? 1 : -1*/) * power.rotZ.force;
         target.velocity = new Vector2(x, y);
         target.angularVelocity = rotZ;
     }
