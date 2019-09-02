@@ -51,13 +51,15 @@ public class GyroPlayer : MonoBehaviour
     /// </summary>
     void CalculatePower()
     {
-        float shakeMagnitude = 0.0f;
+        float horizontalMagnitude = 0.0f;
+        float verticalMagnitude = 0.0f;
         float zRotation = 0.0f;
         for(int i = 0; i < playing.frames.Count; ++i)
         {
-            shakeMagnitude += playing.frames[i].userAcceleration.magnitude * Time.deltaTime;
+            horizontalMagnitude += Mathf.Sqrt(Vector2.SqrMagnitude(playing.frames[i].userAcceleration)) * Time.fixedDeltaTime;
+            verticalMagnitude = playing.frames[i].userAcceleration.z * Time.fixedDeltaTime;
             //zRotation += ((playing.frames[i].attitude.x + playing.frames[i].attitude.y + playing.frames[i].attitude.z) * Time.deltaTime);
-            zRotation += (playing.frames[i].attitude.eulerAngles.magnitude  * Time.deltaTime);
+            zRotation += (playing.frames[i].attitude.eulerAngles.magnitude  * Time.fixedDeltaTime);
         }
         // Divide by the total number of frames
         // to get the average
@@ -67,8 +69,8 @@ public class GyroPlayer : MonoBehaviour
 
         // If there is any resistance
         // add it here
-        float xPower = shakeMagnitude;
-        float yPower = shakeMagnitude;
+        float xPower = horizontalMagnitude;
+        float yPower = verticalMagnitude;
         float zRot = zRotation;
         float frequency = 1 / shakeDuration;
         shakePower = new Shake.ShakePower(xPower, yPower, zRot, frequency);
