@@ -55,21 +55,30 @@ public class GyroPlayer : MonoBehaviour
         for(int i = 0; i < playing.frames.Count; ++i)
         {
             shakeMagnitude += playing.frames[i].userAcceleration.magnitude * Time.deltaTime;
-            zRotation += (playing.frames[i].attitude.x + playing.frames[i].attitude.y + playing.frames[i].attitude.z) * Time.deltaTime;
+            //zRotation += ((playing.frames[i].attitude.x + playing.frames[i].attitude.y + playing.frames[i].attitude.z) * Time.deltaTime);
+            zRotation += (playing.frames[i].attitude.eulerAngles.magnitude * Time.deltaTime);
         }
+
+        zRotation /= playing.frames.Count;
 
         // If there is any resistance
         // add it here
-        shakePower.xPower = shakeMagnitude;
-        shakePower.yPower = shakeMagnitude;
-        shakePower.zRot = zRotation;
+        float xPower = shakeMagnitude;
+        float yPower = shakeMagnitude;
+        float zRot = zRotation;
+        float frequency = 1 / shakeDuration;
+        shakePower = new Shake.ShakePower(xPower, yPower, zRot, frequency);
+        //shakePower.xPower = shakeMagnitude;
+        //shakePower.yPower = shakeMagnitude;
+        //shakePower.zRot = zRotation;
 
-        // Frequency = 1 / T
-        shakePower.xFrequency = shakePower.yFrequency = shakePower.rotFrequency = 1 / shakeDuration;
+        //// Frequency = 1 / T
+        //shakePower.xFrequency = shakePower.yFrequency = shakePower.rotFrequency = 1 / shakeDuration;
 
         Debug.Log("xPower : " + shakePower.xPower);
         Debug.Log("yPower : " + shakePower.yPower);
         Debug.Log("zRot : " + shakePower.zRot);
+        Debug.Log("Frequency : " + frequency);
     }
 
 }
