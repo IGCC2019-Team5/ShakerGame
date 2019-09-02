@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GyroPlayer : MonoBehaviour
 {
@@ -12,22 +13,25 @@ public class GyroPlayer : MonoBehaviour
     {
         playing = GyroRecorder.lastMovie;
         target = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        Play(this.playing);
+        StartCoroutine(Play(this.playing));
     }
 
     IEnumerator Play(Shake.ShakeMovie playing)
     {
+        float lastRotation = playing.frames.Count > 0 ? playing.frames[0].attitude.eulerAngles.z : 0f;
         foreach (var frame in playing.frames)
         {
-            target.AddForce(frame.translation);
-            target.AddTorque(frame.rotation.eulerAngles.z);
-            yield return null;
+            float rotation = frame.attitude.eulerAngles.z;
+            float deltaRotation = rotation - lastRotation;
+            lastRotation = rotation;
+
+            target.AddForce(frame.userAcceleration);
+            target.AddTorque(deltaRotation);
+            Debug.Log($"Force:{frame.userAcceleration}, Torque:{deltaRotation}");
+            yield return new WaitForFixedUpdate();
         }
+
+        SceneManager.LoadScene("TestScene");
 
         yield break;
     }
