@@ -51,14 +51,16 @@ namespace Shake
 
     public class ShakePower
     {
-        float xPower, yPower;
-        float zRot;
+        public float xPower, yPower;
+        public float zRot;
+        public float xFrequency, yFrequency, rotFrequency;
 
-        public ShakePower(float _xPower, float _yPower, float _zRot)
+        public ShakePower(float _xPower, float _yPower, float _zRot, float _frequency)
         {
             xPower = _xPower;
             yPower = _yPower;
             zRot = _zRot;
+            xFrequency = yFrequency = rotFrequency = _frequency;
         }
     }
 
