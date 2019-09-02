@@ -56,8 +56,6 @@ public class BuildSystem : MonoBehaviour
 
     private void Update()
     {
-
-#if UNITY_ANDROID
         //  Initiating touch event
         // if touch event takes place
         if (Input.touchCount > 0)
@@ -72,9 +70,8 @@ public class BuildSystem : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    if (GetComponent<BoxCollider2D>() == Physics2D.OverlapPoint(new Vector2(touchPosX,touchPosY)))
+                    if (GetComponent<BoxCollider2D>() == Physics2D.OverlapPoint(new Vector2(touchPosX, touchPosY)))
                     {
-                     
                         moveAllowed = true;
                     }
 
@@ -93,7 +90,72 @@ public class BuildSystem : MonoBehaviour
                     break;
             }
         }
+        else if (Input.touchCount == 1)
+        {
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                blockTemplate.transform.Rotate(Vector3.forward * -90);
+            }
+        }
 
-#endif
+        RaycastHit2D rayhit;
+        if (currentBlock.isSolid == true)
+        {
+            rayhit = Physics2D.Raycast(blockTemplate.transform.position, Vector2.zero, Mathf.Infinity, solidNoBuildLayer);
+        }
+        else
+        {
+            rayhit = Physics2D.Raycast(blockTemplate.transform.position, Vector2.zero, Mathf.Infinity, backingNoBuildLayer);
+        }
+
+        if (rayhit.collider != null)
+        {
+            buildBlocked = true;
+        }
+        else
+        {
+            buildBlocked = false;
+        }
+        if (buildBlocked)
+        {
+            currentRend.color = new Color(1f, 0f, 0f, 1f);
+        }
+        else
+        {
+            currentRend.color = new Color(1f, 1f, 1f, 1f);
+        }
     }
+
+    public void SetItem(int currentBlockID)
+    {
+        //Flip bool
+        buildModeOn = !buildModeOn;
+
+        //if we have current block type, destroy it
+        if (blockTemplate != null)
+        {
+            Destroy(blockTemplate);
+        }
+
+        //if we dont have a current block type set
+        if (currentBlock == null)
+        {
+            //Ensure allBlocks aray is ready
+            if (blockSys.allBlocks[currentBlockID] != null)
+            {
+                //Get a new currentBlock using the ID variable
+                currentBlock = blockSys.allBlocks[currentBlockID];
+            }
+        }
+        if (buildModeOn)
+        {
+            //Create a new object for block Template/
+            blockTemplate = new GameObject("CurrentBlockTemplate");
+            //Add and store reference to a SpriteRenderer on the template object
+            currentRend = blockTemplate.AddComponent<SpriteRenderer>();
+            //Set the sprite of the template object to match current block type
+            currentRend.sprite = currentBlock.blockSprite;
+        }
+    }
+
 }
