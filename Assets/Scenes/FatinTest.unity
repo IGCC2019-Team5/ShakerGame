@@ -333,7 +333,6 @@ GameObject:
   m_Component:
   - component: {fileID: 710726347}
   - component: {fileID: 710726346}
-  - component: {fileID: 710726345}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -341,25 +340,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &710726345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710726344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d97fbbb922c1248b185823476ccbdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allBlockTypes:
-  - blockName: Meat_Hollow
-    blockSprite: {fileID: 21300000, guid: 89103c1eabe07444aadd10b66fb6f817, type: 3}
-    blockIsSolid: 1
-  - blockName: Meat_Long
-    blockSprite: {fileID: 21300000, guid: 545c2e5e563272c44a316a8de2aa1158, type: 3}
-    blockIsSolid: 1
 --- !u!114 &710726346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,7 +347,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 710726344}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28444ef0d53ac5b4d80c1a2a1fa53b01, type: 3}
   m_Name: 
