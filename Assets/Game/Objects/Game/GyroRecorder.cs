@@ -48,7 +48,7 @@ public class GyroRecorder : MonoBehaviour
 
         if (manager.chart != null)
         {
-            manager.chart.UpdateChart(GyroCalculator.CalculatePower(manager.settings, manager.movie), true);
+            manager.chart.UpdateChart(manager.settings, GyroCalculator.CalculatePower(manager.settings, manager.movie), true);
         }
     }
 

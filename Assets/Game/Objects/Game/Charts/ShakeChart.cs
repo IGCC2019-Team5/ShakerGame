@@ -12,12 +12,12 @@ public class ShakeChart : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void UpdateChart(Shake.ShakePower shakePower, bool immediately = false)
+    public void UpdateChart(GameSettings settings, Shake.ShakePower shakePower, bool immediately = false)
     {
         List<float> data = new List<float>() {
-                shakePower.x.power,
-                shakePower.y.power,
-                shakePower.rotZ.power,
+                shakePower.y.power * settings.chartMultiplier,
+                shakePower.x.power * settings.chartMultiplier,
+                shakePower.rotZ.power * settings.chartMultiplier,
                 0
             };
         chart.ApplyData(data, immediately);
