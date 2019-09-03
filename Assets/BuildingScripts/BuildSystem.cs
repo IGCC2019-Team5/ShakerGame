@@ -88,6 +88,7 @@ public class BuildSystem : MonoBehaviour
                 currentRend = blockTemplate.AddComponent<SpriteRenderer>();
                 //Set the sprite of the template object to match crrent block type
                 currentRend.sprite = currentBlock.blockSprite;
+                currentRend.sortingOrder = 1;
             }
         }
 
@@ -168,18 +169,19 @@ public class BuildSystem : MonoBehaviour
                 newBlock.transform.rotation = blockTemplate.transform.rotation;
                 SpriteRenderer newRend = newBlock.AddComponent<SpriteRenderer>();
                 newRend.sprite = currentBlock.blockSprite;
+                newRend.sortingOrder = 1;
 
                 if (currentBlock.isSolid == true)
                 {
                     newBlock.AddComponent<BoxCollider2D>();
                     newBlock.layer = 9;
-                    newRend.sortingOrder = -10;
+                    newRend.sortingOrder = 1;
                 }
                 else
                 {
                     newBlock.AddComponent<BoxCollider2D>();
                     newBlock.layer = 10;
-                    newRend.sortingOrder = -11;
+                    newRend.sortingOrder = 1;
                 }
             }
 
