@@ -19,6 +19,14 @@ public class PlatformShake : MonoBehaviour
 
     void OnStateChanged(GameState oldState, GameState newState)
     {
+        if (newState == GameState.PLAYING)
+            manager.chart.UpdateChart(manager.settings, manager.power, false);
+        if (oldState == GameState.PLAYING)
+        {
+            target.velocity = Vector2.zero;
+            target.angularVelocity = 0;
+            target.isKinematic = true;
+        }
     }
 
     // Update is called once per frame
@@ -31,8 +39,8 @@ public class PlatformShake : MonoBehaviour
         float x = (Mathf.Sin(Mathf.PI * 2 * manager.power.x.freq * manager.elapsedTime)/* > 0 ? 1 : -1*/) * manager.power.x.power;
         float y = (Mathf.Sin(Mathf.PI * 2 * manager.power.y.freq * manager.elapsedTime)/* > 0 ? 1 : -1*/) * manager.power.y.power;
         float rotZ = (Mathf.Sin(Mathf.PI * 2 * manager.power.rotZ.freq * manager.elapsedTime)/* > 0 ? 1 : -1*/) * manager.power.rotZ.power;
-        target.velocity = new Vector2(x, y);
-        target.angularVelocity = rotZ;
+        target.velocity = new Vector2(x * manager.settings.xPowerMultiplier, y * manager.settings.yPowerMultiplier);
+        target.angularVelocity = rotZ * manager.settings.rotationPowerMultiplier;
 
         if (manager.elapsedTime > manager.settings.shakingTime)
         {

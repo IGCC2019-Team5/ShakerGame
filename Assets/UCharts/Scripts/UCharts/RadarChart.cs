@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace UCharts
 {
-	public class RadarChart : ChartBase, IPointerDownHandler, IDragHandler, IEndDragHandler
+	public class RadarChart : ChartBase/*, IPointerDownHandler, IDragHandler, IEndDragHandler*/
 	{
         [SerializeField] private float m_Thickness = 5;
         
@@ -70,8 +70,13 @@ namespace UCharts
         {
             m_Data = data;
             if (immediately)
+            {
                 for (var i = 0; i < m_DataDisplay.Count; ++i)
                     m_DataDisplay[i] = m_Data[i];
+                m_PlayAnimation = false;
+                m_PlayAnimationTimestamp = Time.time - 1f;
+                SetVerticesDirty();
+            }
             else
                 PlayAnimation();
         }
@@ -271,7 +276,8 @@ namespace UCharts
 				);
 			}
 		}
-
+        
+        /*
 		#region TouchHanlder
 		public void OnPointerDown(PointerEventData data)
         {
@@ -294,6 +300,7 @@ namespace UCharts
 			m_baseRotation = m_Rotatioin;
 		}
 		#endregion
+        */
 	}
 
 	[Serializable]

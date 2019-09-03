@@ -45,6 +45,11 @@ public class GyroRecorder : MonoBehaviour
 
         if (manager.elapsedTime > manager.settings.shakingTime)
             manager.state = GameState.PLAYING;
+
+        if (manager.chart != null)
+        {
+            manager.chart.UpdateChart(manager.settings, GyroCalculator.CalculatePower(manager.settings, manager.movie), true);
+        }
     }
 
     public void StartGame()

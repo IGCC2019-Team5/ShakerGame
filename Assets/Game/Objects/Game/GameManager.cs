@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     }
     public Shake.ShakeMovie movie;
     public Shake.ShakePower power;
+    public ShakeChart chart;
 
     private void Start()
     {

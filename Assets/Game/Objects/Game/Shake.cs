@@ -58,5 +58,12 @@ namespace Shake
             this.y = new ShakeWave() { power = _yPower, freq = _frequency };
             this.rotZ = new ShakeWave() { power = _zRot, freq = _frequency };
         }
+
+        public ShakePower(float _xPower, float _yPower, float _zRot, float _xFrequency, float _yFrequency, float _zRotFrequency)
+        {
+            this.x = new ShakeWave() { power = _xPower, freq = _xFrequency };
+            this.y = new ShakeWave() { power = _yPower, freq = _yFrequency };
+            this.rotZ = new ShakeWave() { power = _zRot, freq = _zRotFrequency };
+        }
     }
 }
