@@ -49,19 +49,31 @@ namespace Shake
         }
     }
 
-    public class ShakePower
+    [System.Serializable]
+    public struct ShakeWave
     {
-        public float xPower, yPower;
-        public float zRot;
-        public float xFrequency, yFrequency, rotFrequency;
+        public float freq;
+        public float power;
+    }
+
+    [System.Serializable]
+    public struct ShakePower
+    {
+        public ShakeWave x, y;
+        public ShakeWave rotZ;
+
+        public ShakePower(ShakeWave x, ShakeWave y, ShakeWave rotZ)
+        {
+            this.x = x;
+            this.y = y;
+            this.rotZ = rotZ;
+        }
 
         public ShakePower(float _xPower, float _yPower, float _zRot, float _frequency)
         {
-            xPower = _xPower;
-            yPower = _yPower;
-            zRot = _zRot;
-            xFrequency = yFrequency = rotFrequency = _frequency;
+            this.x = new ShakeWave() { power = _xPower, freq = _frequency };
+            this.y = new ShakeWave() { power = _yPower, freq = _frequency };
+            this.rotZ = new ShakeWave() { power = _zRot, freq = _frequency };
         }
     }
-
 }
