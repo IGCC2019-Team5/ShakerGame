@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class BlockSystem : MonoBehaviour
 {
-
     // Array we expose to inspector / editor, use this instead of the old arrays to define block types.
     [SerializeField]
     private BlockType[] allBlockTypes;
@@ -64,3 +63,8 @@ public struct BlockType
     public Sprite blockSprite;
     public bool blockIsSolid;
 }
+
+
+
+
+
