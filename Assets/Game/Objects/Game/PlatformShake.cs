@@ -19,6 +19,8 @@ public class PlatformShake : MonoBehaviour
 
     void OnStateChanged(GameState oldState, GameState newState)
     {
+        if (newState == GameState.PLAYING)
+            manager.chart.UpdateChart(manager.power, false);
     }
 
     // Update is called once per frame

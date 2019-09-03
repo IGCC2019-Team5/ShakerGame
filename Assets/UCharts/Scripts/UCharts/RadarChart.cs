@@ -70,8 +70,13 @@ namespace UCharts
         {
             m_Data = data;
             if (immediately)
+            {
                 for (var i = 0; i < m_DataDisplay.Count; ++i)
                     m_DataDisplay[i] = m_Data[i];
+                m_PlayAnimation = false;
+                m_PlayAnimationTimestamp = Time.time - 1f;
+                SetVerticesDirty();
+            }
             else
                 PlayAnimation();
         }

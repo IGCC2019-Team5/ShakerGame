@@ -14,4 +14,6 @@ public class GameSettings : ScriptableObject
 
     public float shakeDuration = 5f;
     public float rotationMultiplier = 2f;
+    public float xMultiplier = 2f;
+    public float yMultiplier = 2f;
 }

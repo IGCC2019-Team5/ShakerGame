@@ -15,4 +15,6 @@ MonoBehaviour:
   shakingTime: 10
   shakeResistance: 0
   shakeDuration: 5
-  rotationMultiplier: 2
+  rotationMultiplier: 0.002
+  xMultiplier: 0.01
+  yMultiplier: 0.01

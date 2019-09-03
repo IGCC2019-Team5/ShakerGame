@@ -1,8 +1,6 @@
 {
-    "name": "Game",
-    "references": [
-        "UCharts"
-    ],
+    "name": "UCharts",
+    "references": [],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
