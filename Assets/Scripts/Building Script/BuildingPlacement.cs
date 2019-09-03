@@ -44,8 +44,8 @@ public class BuildingPlacement : MonoBehaviour
                 case TouchPhase.Moved:
                     {
                         m = new Vector2(touch.position.x, touch.position.y);
-                        Vector2 pos = Mathf.Round(Camera.main.ScreenToWorldPoint(m);
-                        currentBuilding.transform.position = new Vector2(pos.x / 2, pos.y * 5);
+                        //Vector2 pos = Mathf.Round(Camera.main.ScreenToWorldPoint(m);
+                        //currentBuilding.transform.position = new Vector2(pos.x / 2, pos.y * 5);
                         Debug.Log("Touch.Move");
                     }
                     //m = new Vector2(touch.position.x, touch.position.y);
