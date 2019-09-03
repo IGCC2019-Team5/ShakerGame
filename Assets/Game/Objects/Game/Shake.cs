@@ -23,29 +23,12 @@ namespace Shake
 
     public class ShakeMovie
     {
-        public readonly List<ShakeFrame> frames = new List<ShakeFrame>();
-
-        public ShakeMovie(List<ShakeFrame> frames)
-        {
-            this.frames = frames;
-        }
-    }
-
-    public class ShakeMovieBuilder
-    {
-        List<ShakeFrame> frames = new List<ShakeFrame>();
-        float startTime;
+        public List<ShakeFrame> frames = new List<ShakeFrame>();
 
         // Add frame to movie
         public void AddFrame(ShakeFrame frame)
         {
             frames.Add(frame);
-        }
-
-        // Create ShakeMovie Instance
-        public ShakeMovie Build()
-        {
-            return new ShakeMovie(frames);
         }
     }
 

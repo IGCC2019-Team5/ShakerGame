@@ -81,10 +81,12 @@ public class GyroPlayer : MonoBehaviour
         //// Frequency = 1 / T
         //shakePower.xFrequency = shakePower.yFrequency = shakePower.rotFrequency = 1 / shakeDuration;
 
-        Debug.Log("xPower : " + shakePower.xPower);
-        Debug.Log("yPower : " + shakePower.yPower);
-        Debug.Log("zRot : " + shakePower.zRot);
+        Debug.Log("xPower : " + shakePower.x.power);
+        Debug.Log("yPower : " + shakePower.y.power);
+        Debug.Log("zRot : " + shakePower.rotZ.power);
         Debug.Log("Frequency : " + frequency);
+
+        GameObject.Find("ShakePowerChart").GetComponent<ShakeChart>().UpdateChart(this);
     }
 
 }
