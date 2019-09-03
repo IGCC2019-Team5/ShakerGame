@@ -8,12 +8,13 @@ public class BlockSystem : MonoBehaviour
 {
     // Array we expose to inspector / editor, use this instead of the old arrays to define block types.
     [SerializeField]
+    [Obsolete]
     private BlockType[] allBlockTypes;
+    public BlocksPalette blockTypes;
 
     // Array to store all blocks created in Awake()
     [HideInInspector]
     public Block[] allBlocks;
-
 
 
     private void Awake()
@@ -38,6 +39,7 @@ public class BlockSystem : MonoBehaviour
 
 
 // We still use the Block class to store the final Block type data.
+[Serializable]
 public class Block
 {
     public int blockID;

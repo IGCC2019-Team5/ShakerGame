@@ -198,4 +198,27 @@ public class BuildSystem : MonoBehaviour
 
         }
     }
+
+    public void OnNewBlock(int id)
+    {
+        //Flip bool
+        buildModeOn = !buildModeOn;
+
+        //if we have a current template, destroy it
+        if (blockTemplate != null)
+        {
+            Destroy(blockTemplate);
+        }
+
+        if (buildModeOn)
+        {
+            //Create a new object for blockTemplate.
+            blockTemplate = Instantiate(blockSys.blockTypes.blocks[id]);
+            blockTemplate.name = "CurrentBlockTemplate";
+            //Add and store reference to a SpriteRenderer on the template object
+            currentRend = blockTemplate.GetComponent<SpriteRenderer>();
+            currentRend.sortingOrder = 1;
+            currentBlock = blockTemplate.GetComponent<BlockInfo>().info;
+        }
+    }
 }
