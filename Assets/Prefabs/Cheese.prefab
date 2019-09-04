@@ -30,6 +30,23 @@ PolygonCollider2D:
       - {x: -1, y: -1}
       - {x: 1, y: -1}
       - {x: 1, y: 1}
+--- !u!114 &4059319100804559142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2516803510509135327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c853f2490812d84c8677a37776a1b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info:
+    blockID: 1
+    blockName: Cheese
+    blockSprite: {fileID: 21300008, guid: e5ce09aa8bdcca247bbb5886ba86236d, type: 3}
+    isSolid: 1
 --- !u!1001 &2507471351085277136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39,7 +56,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9333332507785743, guid: 3c25f7150575670418580cc7889a9a0e, type: 3}
       propertyPath: m_Name
-      value: Block
+      value: Cheese
       objectReference: {fileID: 0}
     - target: {fileID: 1987792624111483600, guid: 3c25f7150575670418580cc7889a9a0e,
         type: 3}

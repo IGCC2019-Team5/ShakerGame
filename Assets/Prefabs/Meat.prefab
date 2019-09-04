@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2592797740391541228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4008007180072526077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c853f2490812d84c8677a37776a1b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info:
+    blockID: 4
+    blockName: Meat
+    blockSprite: {fileID: 21300006, guid: e5ce09aa8bdcca247bbb5886ba86236d, type: 3}
+    isSolid: 1
 --- !u!1001 &4016759888830159602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114,3 +131,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c25f7150575670418580cc7889a9a0e, type: 3}
+--- !u!1 &4008007180072526077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9333332507785743, guid: 3c25f7150575670418580cc7889a9a0e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4016759888830159602}
+  m_PrefabAsset: {fileID: 0}

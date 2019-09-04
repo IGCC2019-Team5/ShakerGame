@@ -113,10 +113,10 @@ public class BuildSystem : MonoBehaviour
             {
                 buildBlocked = false;
             }
-            if (Vector2.Distance(playerObject.transform.position, blockTemplate.transform.position) > maxBuildDist)
-            {
-                buildBlocked = true;
-            }
+            //if (Vector2.Distance(playerObject.transform.position, blockTemplate.transform.position) > maxBuildDist)
+            //{
+            //    buildBlocked = true;
+            //}
 
             if (buildBlocked)
             {
