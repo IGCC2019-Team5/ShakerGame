@@ -1,73 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CanvasActive : MonoBehaviour
 {
-    public static CanvasActive instance;
     [SerializeField]
-    private GameObject CanvasObject;
+    private UnityEvent StateBegin;
     [SerializeField]
-    private GameObject CanvasShake;
+    private UnityEvent StateEnd;
+    [SerializeField]
+    private GameState State;
 
     GameManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (instance == null)
-            instance = null;
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        if (CanvasObject == null)
-        {
-            CanvasObject = GameObject.Find("FoodCanvas");
-        }
-        if (CanvasShake == null)
-        {
-            CanvasShake = GameObject.Find("ShakeCanvas");
-        }
-
         manager = GameManager.Get();
-       manager.stateChangeEvents += OnStateChanged;
-
-    }
-
-    // Update is called once per frame
-    public void ShakeCanvas()
-    {
-        CanvasShake.SetActive(true);
-        CanvasObject.SetActive(false);
-    }
-    public void FoodCanvas()
-    {
-        CanvasShake.SetActive(false);
-        CanvasObject.SetActive(true);
+        manager.stateChangeEvents += OnStateChanged;
     }
 
     void OnStateChanged(GameState oldState, GameState newState)
     {
-        if (newState == GameState.BUILDING)//Previous State
+        if (newState == State)//Previous State
         {
-            Debug.Log("Test");
-            FoodCanvas();
-            ChangeBGSize.instance.ZoomInBG();
+            StateBegin.Invoke();
         }
 
-        if (oldState == GameState.BUILDING)//Next State
+        if (oldState == State)//Next State
         {
-            ShakeCanvas();
-            ChangeBGSize.instance.ZoomOutBG();
+            StateEnd.Invoke();
         }
-    }
-
-    public static void Destory()
-    {
-        if (instance)
-            Destroy(instance.gameObject);
     }
 }

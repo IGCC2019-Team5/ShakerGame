@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildSystem : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class BuildSystem : MonoBehaviour
     // Reference to the playerobject
     [SerializeField]
     private GameObject playerObject;
+
+    public GameObject foodPool;
 
     float rotation = 0;
 
@@ -193,7 +196,7 @@ public class BuildSystem : MonoBehaviour
         if (buildModeOn)
         {
             //Create a new object for blockTemplate.
-            blockTemplate = Instantiate(newObject);
+            blockTemplate = Instantiate(newObject/*, foodPool.transform*/);
             blockTemplate.name = "CurrentBlockTemplate";
             blockTemplate.layer = 0;
             //Add and store reference to a SpriteRenderer on the template object
@@ -213,7 +216,7 @@ public class BuildSystem : MonoBehaviour
             if (buildBlocked == false)
             {
                 var prefab = blockSys.blockTypes.blocks[currentBlock.id];
-                GameObject newBlock = Instantiate(prefab);
+                GameObject newBlock = Instantiate(prefab, foodPool.transform);
                 newBlock.transform.position = blockTemplate.transform.position;
                 newBlock.transform.rotation = blockTemplate.transform.rotation;
                 SpriteRenderer newRend = newBlock.GetComponent<SpriteRenderer>();
