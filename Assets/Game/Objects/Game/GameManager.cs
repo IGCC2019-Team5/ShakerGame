@@ -10,6 +10,7 @@ public enum GameState
     /* 5 */ PLAYING,
     /* 6 */ FINISHED,
     /* 3 */ WATING,
+    /* 7 */ DIED,
 }
 
 public class GameManager : MonoBehaviour
