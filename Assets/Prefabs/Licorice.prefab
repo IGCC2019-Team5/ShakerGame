@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &2401595989792108307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5672632545930734147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c853f2490812d84c8677a37776a1b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info:
+    blockID: 3
+    blockName: Licorice
+    blockSprite: {fileID: 21300010, guid: e5ce09aa8bdcca247bbb5886ba86236d, type: 3}
+    isSolid: 1
 --- !u!1001 &5663300322067943500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109,3 +126,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c25f7150575670418580cc7889a9a0e, type: 3}
+--- !u!1 &5672632545930734147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9333332507785743, guid: 3c25f7150575670418580cc7889a9a0e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5663300322067943500}
+  m_PrefabAsset: {fileID: 0}
