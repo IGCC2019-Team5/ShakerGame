@@ -9,6 +9,7 @@ public class SceneChanger : MonoBehaviour
 
     public void LoadScene()
     {
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
+        MyFade.Get().Fadeout(sceneName);
     }
 }
