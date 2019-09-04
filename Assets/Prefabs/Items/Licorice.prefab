@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    blockID: 3
-    blockName: Licorice
-    blockSprite: {fileID: 21300010, guid: e5ce09aa8bdcca247bbb5886ba86236d, type: 3}
+    id: 3
     isSolid: 1
 --- !u!1001 &5663300322067943500
 PrefabInstance:

@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    blockID: 2
-    blockName: Corn
-    blockSprite: {fileID: 21300002, guid: e5ce09aa8bdcca247bbb5886ba86236d, type: 3}
+    id: 2
     isSolid: 1
 --- !u!1001 &7190340614622034682
 PrefabInstance:
@@ -27,6 +25,10 @@ PrefabInstance:
     - target: {fileID: 9333332507785743, guid: 3c25f7150575670418580cc7889a9a0e, type: 3}
       propertyPath: m_Name
       value: Corn
+      objectReference: {fileID: 0}
+    - target: {fileID: 9333332507785743, guid: 3c25f7150575670418580cc7889a9a0e, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1987792624111483600, guid: 3c25f7150575670418580cc7889a9a0e,
         type: 3}

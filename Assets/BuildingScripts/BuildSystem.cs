@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuildSystem : MonoBehaviour
 {
@@ -25,7 +23,7 @@ public class BuildSystem : MonoBehaviour
 
     //Float to adjust the size of blocks when placing in world
     [SerializeField]
-    private float blockSizeMod;
+    private float blockSizeMod = 0.25f;
 
     //Layer mask to control raycasting
     [SerializeField]
@@ -40,10 +38,10 @@ public class BuildSystem : MonoBehaviour
     private GameObject playerObject;
 
     [SerializeField]
-    private float maxBuildDist;
+    private  float maxBuildDist;
 
     //s public bool isMobile = false;
-    private bool moveAllowed = false;
+    private readonly bool moveAllowed = false;
 
     private void Awake()
     {
@@ -62,9 +60,12 @@ public class BuildSystem : MonoBehaviour
             OnNewBlock(blockSys.blockTypes.blocks[currentBlockID]);
         }
 
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        float newPosX = Mathf.Round(mousePos.x / blockSizeMod) * blockSizeMod;
+        float newPosY = Mathf.Round(mousePos.y / blockSizeMod) * blockSizeMod;
+        Vector2 newPos = new Vector2(newPosX, newPosY);
         if (buildModeOn && blockTemplate != null)
         {
-
             RaycastHit2D rayhit;
             if (currentBlock.isSolid == true)
             {
@@ -77,16 +78,17 @@ public class BuildSystem : MonoBehaviour
 
             if (rayhit.collider != null)
             {
+                Debug.Log(rayhit.collider.gameObject);
                 buildBlocked = true;
             }
             else
             {
                 buildBlocked = false;
             }
-            //if (Vector2.Distance(playerObject.transform.position, blockTemplate.transform.position) > maxBuildDist)
-            //{
-            //    buildBlocked = true;
-            //}
+            if (Vector2.Distance(playerObject.transform.position, blockTemplate.transform.position) > maxBuildDist)
+            {
+                buildBlocked = true;
+            }
 
             if (buildBlocked)
             {
@@ -97,16 +99,14 @@ public class BuildSystem : MonoBehaviour
                 currentRend.color = new Color(1f, 1f, 1f, 1f);
             }
 
-            float newPosX = Mathf.Round(Camera.main.ScreenToWorldPoint(Input.mousePosition).x / blockSizeMod) * blockSizeMod;
-            float newPosY = Mathf.Round(Camera.main.ScreenToWorldPoint(Input.mousePosition).y / blockSizeMod) * blockSizeMod;
-            blockTemplate.transform.position = new Vector2(newPosX, newPosY);
-            // Debug.Log("newPosX: " + blockTemplate.transform.position.x + "newPosY: " + blockTemplate.transform.position.y);
-            //Debug.Log("mousePosX: " + Input.mousePosition.x + "mousePosY: " + Input.mousePosition.x);
+            //Debug.Log($"newPosX: {newPos.x}, newPosY: {newPos.y}");
+            //Debug.Log($"mousePosX: {Input.mousePosition.x}, mousePosY: {Input.mousePosition.x}");
+            blockTemplate.transform.position = newPos;
 
             float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
             if (mouseWheel != 0)
             {
-                selectableBlocksTotal = blockSys.allBlocks.Length - 1;
+                selectableBlocksTotal = blockSys.blockTypes.blocks.Count - 1;
                 if (mouseWheel > 0)
                 {
                     currentBlockID--;
@@ -123,8 +123,9 @@ public class BuildSystem : MonoBehaviour
                         currentBlockID = 0;
                     }
                 }
-                currentBlock = blockSys.allBlocks[currentBlockID];
-                currentRend.sprite = currentBlock.blockSprite;
+                GameObject block = blockSys.blockTypes.blocks[currentBlockID];
+                currentBlock = block.GetComponent<BlockInfo>().info;
+                currentRend.sprite = block.GetComponent<SpriteRenderer>().sprite;
 
             }
             if (Input.GetKeyDown("q"))
@@ -133,34 +134,34 @@ public class BuildSystem : MonoBehaviour
                 blockTemplate.transform.Rotate(Vector3.forward * -90);
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                OnPlace();
-            }
-
-            if (Input.GetMouseButtonDown(1) && blockTemplate != null)
-            {
-                RaycastHit2D destroyHIt = Physics2D.Raycast(blockTemplate.transform.position, Vector2.zero, Mathf.Infinity, AllBlocksLayer);
-
-                if (destroyHIt.collider != null)
-                {
-                    Destroy(destroyHIt.collider.gameObject);
-                }
-            }
-
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    OnPlace();
+            //}
         }
-    }
 
-    [System.Obsolete]
-    public void OnNewObject(int id)
-    {
-        OnNewBlock(blockSys.blockTypes.blocks[id]);
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit2D destroyHIt = Physics2D.Raycast(newPos, Vector2.zero, Mathf.Infinity, AllBlocksLayer);
+
+            if (destroyHIt.collider != null)
+            {
+                var prefab = blockSys.blockTypes.blocks[destroyHIt.collider.gameObject.GetComponent<BlockInfo>().info.id];
+                OnNewBlock(prefab);
+                Destroy(destroyHIt.collider.gameObject);
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            OnPlace();
+        }
     }
 
     public void OnNewBlock(GameObject newObject)
     {
         //Flip bool
-        buildModeOn = !buildModeOn;
+        buildModeOn = true;
 
         //if we have a current template, destroy it
         if (blockTemplate != null)
@@ -173,6 +174,7 @@ public class BuildSystem : MonoBehaviour
             //Create a new object for blockTemplate.
             blockTemplate = Instantiate(newObject);
             blockTemplate.name = "CurrentBlockTemplate";
+            blockTemplate.layer = 0;
             //Add and store reference to a SpriteRenderer on the template object
             currentRend = blockTemplate.GetComponent<SpriteRenderer>();
             currentRend.sortingOrder = 1;
@@ -182,29 +184,38 @@ public class BuildSystem : MonoBehaviour
 
     public void OnPlace()
     {
-        //Flip bool
-        buildModeOn = !buildModeOn;
-
-        if (buildBlocked == false)
+        if (buildModeOn)
         {
-            GameObject newBlock = new GameObject(currentBlock.blockName);
-            newBlock.transform.position = blockTemplate.transform.position;
-            newBlock.transform.rotation = blockTemplate.transform.rotation;
-            SpriteRenderer newRend = newBlock.AddComponent<SpriteRenderer>();
-            newRend.sprite = currentBlock.blockSprite;
-            newRend.sortingOrder = 1;
+            //Flip bool
+            buildModeOn = false;
 
-            if (currentBlock.isSolid == true)
+            if (buildBlocked == false)
             {
-                newBlock.AddComponent<BoxCollider2D>();
-                newBlock.layer = 9;
+                var prefab = blockSys.blockTypes.blocks[currentBlock.id];
+                GameObject newBlock = Instantiate(prefab);
+                newBlock.transform.position = blockTemplate.transform.position;
+                newBlock.transform.rotation = blockTemplate.transform.rotation;
+                SpriteRenderer newRend = newBlock.GetComponent<SpriteRenderer>();
                 newRend.sortingOrder = 1;
+
+                if (currentBlock.isSolid == true)
+                {
+                    //newBlock.AddComponent<BoxCollider2D>();
+                    newBlock.layer = 9;
+                    newRend.sortingOrder = 1;
+                }
+                else
+                {
+                    //newBlock.AddComponent<BoxCollider2D>();
+                    newBlock.layer = 10;
+                    newRend.sortingOrder = 1;
+                }
             }
-            else
+
+            //if we have a current template, destroy it
+            if (blockTemplate != null)
             {
-                newBlock.AddComponent<BoxCollider2D>();
-                newBlock.layer = 10;
-                newRend.sortingOrder = 1;
+                Destroy(blockTemplate);
             }
         }
     }

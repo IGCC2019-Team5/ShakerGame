@@ -1,22 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &5040935434592462740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1585355370013453269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c853f2490812d84c8677a37776a1b60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  info:
-    blockID: 5
-    blockName: Pumpkin
-    blockSprite: {fileID: 21300004, guid: e5ce09aa8bdcca247bbb5886ba86236d, type: 3}
-    isSolid: 1
 --- !u!58 &5277356531295200624
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -33,6 +16,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &5040935434592462740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585355370013453269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c853f2490812d84c8677a37776a1b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info:
+    id: 5
+    isSolid: 1
 --- !u!1001 &1594688590310969818
 PrefabInstance:
   m_ObjectHideFlags: 0

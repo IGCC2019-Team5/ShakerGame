@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    blockID: 4
-    blockName: Meat
-    blockSprite: {fileID: 21300006, guid: e5ce09aa8bdcca247bbb5886ba86236d, type: 3}
+    id: 4
     isSolid: 1
 --- !u!1001 &4016759888830159602
 PrefabInstance:
