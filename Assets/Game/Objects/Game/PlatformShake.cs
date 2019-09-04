@@ -27,10 +27,6 @@ public class PlatformShake : MonoBehaviour
             target.angularVelocity = 0;
             target.isKinematic = true;
         }
-        if (oldState == GameState.FINISHED)
-        {
-
-        }
     }
 
     // Update is called once per frame
@@ -38,6 +34,8 @@ public class PlatformShake : MonoBehaviour
     {
         if (manager.state != GameState.PLAYING)
             return;
+
+        Handheld.Vibrate();
 
         manager.elapsedTime += Time.fixedDeltaTime;
         float x = (Mathf.Sin(Mathf.PI * 2 * manager.power.x.freq * manager.elapsedTime)/* > 0 ? 1 : -1*/) * manager.power.x.power;
@@ -49,6 +47,7 @@ public class PlatformShake : MonoBehaviour
         if (manager.elapsedTime > manager.settings.shakingTime)
         {
             manager.state = GameState.FINISHED;
+            SoundManager.sm_Instance.PlayAmbient(1);
         }
     }
 }
