@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildSystem : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class BuildSystem : MonoBehaviour
     [SerializeField]
     private GameObject playerObject;
 
+    public GameObject foodPool;
+
     float rotation = 0;
 
     //[SerializeField]
@@ -45,6 +48,10 @@ public class BuildSystem : MonoBehaviour
 
     //s public bool isMobile = false;
     private readonly bool moveAllowed = false;
+
+    public bool buildEnabled { get; set; }
+
+    GameManager manager;
 
     private void Awake()
     {
@@ -55,13 +62,30 @@ public class BuildSystem : MonoBehaviour
         playerObject = GameObject.Find("Player");
     }
 
+    private void Start()
+    {
+        manager = GameManager.Get();
+        manager.stateChangeEvents += OnStateChanged;
+    }
+
+    void OnStateChanged(GameState oldState, GameState newState)
+    {
+        if (oldState == GameState.BUILDING)
+        {
+            Destroy(blockTemplate);
+        }
+    }
+
     private void Update()
     {
-        // If E key pressed, toggle build mode
-        if (Input.GetKeyDown("e"))
-        {
-            OnNewBlock(blockSys.blockTypes.blocks[currentBlockID]);
-        }
+        if (!buildEnabled)
+            return;
+
+        //// If E key pressed, toggle build mode
+        //if (Input.GetKeyDown("e"))
+        //{
+        //    OnNewBlock(blockSys.blockTypes.blocks[currentBlockID]);
+        //}
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float newPosX = Mathf.Round(mousePos.x / blockSizeMod) * blockSizeMod;
@@ -107,35 +131,35 @@ public class BuildSystem : MonoBehaviour
             //Debug.Log($"mousePosX: {Input.mousePosition.x}, mousePosY: {Input.mousePosition.x}");
             blockTemplate.transform.position = newPos;
 
-            float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
-            if (mouseWheel != 0)
-            {
-                selectableBlocksTotal = blockSys.blockTypes.blocks.Count - 1;
-                if (mouseWheel > 0)
-                {
-                    currentBlockID--;
-                    if (currentBlockID < 0)
-                    {
-                        currentBlockID = selectableBlocksTotal;
-                    }
-                }
-                else if (mouseWheel < 0)
-                {
-                    currentBlockID++;
-                    if (currentBlockID > selectableBlocksTotal)
-                    {
-                        currentBlockID = 0;
-                    }
-                }
-                GameObject block = blockSys.blockTypes.blocks[currentBlockID];
-                currentBlock = block.GetComponent<BlockInfo>().info;
-                currentRend.sprite = block.GetComponent<SpriteRenderer>().sprite;
+            //float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
+            //if (mouseWheel != 0)
+            //{
+            //    selectableBlocksTotal = blockSys.blockTypes.blocks.Count - 1;
+            //    if (mouseWheel > 0)
+            //    {
+            //        currentBlockID--;
+            //        if (currentBlockID < 0)
+            //        {
+            //            currentBlockID = selectableBlocksTotal;
+            //        }
+            //    }
+            //    else if (mouseWheel < 0)
+            //    {
+            //        currentBlockID++;
+            //        if (currentBlockID > selectableBlocksTotal)
+            //        {
+            //            currentBlockID = 0;
+            //        }
+            //    }
+            //    GameObject block = blockSys.blockTypes.blocks[currentBlockID];
+            //    currentBlock = block.GetComponent<BlockInfo>().info;
+            //    currentRend.sprite = block.GetComponent<SpriteRenderer>().sprite;
 
-            }
-            if (Input.GetKeyDown("q"))
-            {
-                Rotate();
-            }
+            //}
+            //if (Input.GetKeyDown("q"))
+            //{
+            //    Rotate();
+            //}
 
             {
                 var angle = blockTemplate.transform.localEulerAngles;
@@ -155,7 +179,9 @@ public class BuildSystem : MonoBehaviour
 
             if (destroyHIt.collider != null)
             {
-                var prefab = blockSys.blockTypes.blocks[destroyHIt.collider.gameObject.GetComponent<BlockInfo>().info.id];
+                var obj = destroyHIt.collider.gameObject;
+                var prefab = blockSys.blockTypes.blocks[obj.GetComponent<BlockInfo>().info.id];
+                rotation = obj.transform.eulerAngles.z;
                 OnNewBlock(prefab);
                 Destroy(destroyHIt.collider.gameObject);
             }
@@ -169,18 +195,27 @@ public class BuildSystem : MonoBehaviour
 
     public void Rotate()
     {
+        if (!buildEnabled)
+            return;
+
         rotation += 90f;
         Rotate(rotation);
     }
 
     public void Rotate(float rotation)
     {
+        if (!buildEnabled)
+            return;
+
         foreach (var button in GameObject.FindObjectsOfType<ItemButton>())
             button.Rotate(rotation);
     }
 
     public void OnNewBlock(GameObject newObject)
     {
+        if (!buildEnabled)
+            return;
+
         //Flip bool
         buildModeOn = true;
 
@@ -193,7 +228,7 @@ public class BuildSystem : MonoBehaviour
         if (buildModeOn)
         {
             //Create a new object for blockTemplate.
-            blockTemplate = Instantiate(newObject);
+            blockTemplate = Instantiate(newObject/*, foodPool.transform*/);
             blockTemplate.name = "CurrentBlockTemplate";
             blockTemplate.layer = 0;
             //Add and store reference to a SpriteRenderer on the template object
@@ -205,6 +240,9 @@ public class BuildSystem : MonoBehaviour
 
     public void OnPlace()
     {
+        if (!buildEnabled)
+            return;
+
         if (buildModeOn)
         {
             //Flip bool
@@ -213,7 +251,7 @@ public class BuildSystem : MonoBehaviour
             if (buildBlocked == false)
             {
                 var prefab = blockSys.blockTypes.blocks[currentBlock.id];
-                GameObject newBlock = Instantiate(prefab);
+                GameObject newBlock = Instantiate(prefab, foodPool.transform);
                 newBlock.transform.position = blockTemplate.transform.position;
                 newBlock.transform.rotation = blockTemplate.transform.rotation;
                 SpriteRenderer newRend = newBlock.GetComponent<SpriteRenderer>();
