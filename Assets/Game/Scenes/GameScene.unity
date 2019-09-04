@@ -5510,7 +5510,7 @@ PrefabInstance:
     - target: {fileID: 2418240348324178116, guid: e2bb9bec0fcbc7041a0ada116a152542,
         type: 3}
       propertyPath: maxTime
-      value: 30
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2bb9bec0fcbc7041a0ada116a152542, type: 3}
@@ -5731,6 +5731,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_GravityScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860096007744249481, guid: 21096a64b341c31419f0e8de351a6ddc,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6782941801217654653, guid: 21096a64b341c31419f0e8de351a6ddc,
         type: 3}
