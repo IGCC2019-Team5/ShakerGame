@@ -47,7 +47,7 @@ public class SoundManager : MonoBehaviour
         loadShaking();
         loadTapping();
 
-        PlayAmbient(2);
+        //PlayAmbient(2);
     }
 
     // Update is called once per frame
@@ -132,6 +132,10 @@ public class SoundManager : MonoBehaviour
         if (index >= bopClips.Count)
             return false;
 
+        // Toggle looping off
+        if (SFXSource.loop)
+            SFXSource.loop = false;
+
         // Check if theres any sounds playing
         // if there is, pause it
         if (SFXSource.isPlaying)
@@ -181,6 +185,46 @@ public class SoundManager : MonoBehaviour
         if (index >= tappingClips.Count)
             return false;
 
+        // Toggle looping off
+        if (SFXSource.loop)
+            SFXSource.loop = false;
+
+        // If it is currently playing
+        if (SFXSource.isPlaying)
+            SFXSource.Pause();
+
+        // Set the clip
+        SFXSource.clip = tappingClips[index];
+
+        // Play
+        SFXSource.Play();
+        return true;
+    }
+
+    public bool PlayTap()
+    {
+        int index = Random.Range(0, tappingClips.Count);
+        // If the index is more than the count for tappign sounds
+        // return
+        if (index >= tappingClips.Count)
+            return false;
+
+        // Toggle looping off
+        if (SFXSource.loop)
+            SFXSource.loop = false;
+
+        Debug.Log(index);
+
+        //If it is currently playing
+        if (SFXSource.isPlaying)
+            SFXSource.Pause();
+
+        // Set the clip
+        SFXSource.clip = tappingClips[index];
+
+        // Play
+        SFXSource.Play();
+
         return true;
     }
 
@@ -195,6 +239,17 @@ public class SoundManager : MonoBehaviour
         // return
         if (index >= shakingClips.Count)
             return false;
+
+        if (SFXSource.isPlaying)
+            SFXSource.Pause();
+
+        // Set the clip
+        SFXSource.clip = shakingClips[index];
+
+        // Play
+        SFXSource.Play();
+
+        SFXSource.loop = true;
 
         return true;
     }
