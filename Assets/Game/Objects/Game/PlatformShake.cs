@@ -27,6 +27,10 @@ public class PlatformShake : MonoBehaviour
             target.angularVelocity = 0;
             target.isKinematic = true;
         }
+        if (oldState == GameState.FINISHED)
+        {
+
+        }
     }
 
     // Update is called once per frame
