@@ -12,6 +12,7 @@ public class SceneChanger : MonoBehaviour
     {
         if (this.gameObject.GetComponent<Button>())
             SoundManager.sm_Instance.PlayTap();
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
+        MyFade.Get().Fadeout(sceneName);
     }
 }
