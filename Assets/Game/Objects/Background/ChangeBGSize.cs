@@ -10,11 +10,16 @@ public class ChangeBGSize : MonoBehaviour
     void Awake()
     {
         if (instance == null)
-            instance = null;
+            instance = this;
         else if (instance != this)
         {
             Destroy(gameObject);
             return;
+        }
+
+        if (m_Animator == null)
+        {
+            m_Animator = GetComponent<Animator>();
         }
     }
     void Start()
@@ -28,7 +33,6 @@ public class ChangeBGSize : MonoBehaviour
     }
     public void ZoomInBG()
     {
-
         m_Animator.SetTrigger("ZoomIn");
     }
     public static void Destory()

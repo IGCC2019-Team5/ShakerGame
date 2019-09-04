@@ -4,7 +4,9 @@ using UnityEngine;
 
 public enum GameState
 {
+    
     INIT,
+    BUILDING,
     RECORDING,
     PLAYING,
     FINISHED,
@@ -37,11 +39,19 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         stateChangeEvents += OnStateChanged;
+        StartCoroutine(OnStarting());
+    }
+
+    private IEnumerator OnStarting()
+    {
+        yield return new WaitForEndOfFrame();
+        state = GameState.BUILDING;
+        yield break;
     }
 
     void OnStateChanged(GameState oldState, GameState newState)
     {
-        elapsedTime = 0;
+       elapsedTime = 0;
     }
 
     public static GameManager Get()
