@@ -41,17 +41,22 @@ public class GameManager : MonoBehaviour
     {
         stateChangeEvents += OnStateChanged;
         StartCoroutine(OnStarting());
+
+
+
     }
 
     private IEnumerator OnStarting()
     {
         yield return new WaitForEndOfFrame();
         state = GameState.BUILDING;
+        SoundManager.sm_Instance.PlayAmbient(2);
         yield break;
     }
 
     void OnStateChanged(GameState oldState, GameState newState)
     {
+
        elapsedTime = 0;
     }
 

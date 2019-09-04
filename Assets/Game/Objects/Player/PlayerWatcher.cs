@@ -18,6 +18,8 @@ public class PlayerWatcher : MonoBehaviour
         if (!area.OverlapPoint(transform.position))
             if (manager.state != GameState.DIED)
             {
+                SoundManager.sm_Instance.PlayAmbient(1);
+
                 manager.state = GameState.DIED;
             }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -19,13 +20,13 @@ public class SoundManager : MonoBehaviour
     // and make One List only instead of Four Lists.
 
     // Holds bopClips
-    List<AudioClip> bopClips = new List<AudioClip>();
+    public List<AudioClip> bopClips = new List<AudioClip>();
     // Holds AmbientClips
-    List<AudioClip> ambientClips = new List<AudioClip>();
+    public List<AudioClip> ambientClips = new List<AudioClip>();
     // Holds tappingClips
-    List<AudioClip> tappingClips = new List<AudioClip>();
+    public List<AudioClip> tappingClips = new List<AudioClip>();
     // Holds shakingClips
-    List<AudioClip> shakingClips = new List<AudioClip>();
+    public List<AudioClip> shakingClips = new List<AudioClip>();
 
     private void Awake()
     {
@@ -41,26 +42,55 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Load all 4 types of sounds
-        loadBops();
-        loadAmbients();
-        loadShaking();
-        loadTapping();
 
-        //PlayAmbient(2);
+        //DirectoryInfo directoryInfo = new DirectoryInfo(Application.streamingAssetsPath);
+        //FileInfo[] allFiles = directoryInfo.GetFiles("*.*");
+
+        //foreach(FileInfo file in allFiles)
+        //{
+        //    // Check to make sure it has these 4 tags
+        //    if (file.Name.Contains("Ambient") || file.Name.Contains("Bop") || file.Name.Contains("Shaking") || file.Name.Contains("Tapping"))
+        //    {
+        //        StartCoroutine("LoadMusic", file);
+        //    }
+        //}
+
+        // Load all 4 types of sounds
+        //loadBops();
+        //loadAmbients();
+        //loadShaking();
+        //loadTapping();
+
+        PlayAmbient(1);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Check if there was a change
-        if (BGSource.volume != BGVolume)
+        if (!BGMusic)
         {
-            BGSource.volume = BGVolume;
+            if (BGSource.isPlaying)
+                BGSource.Pause();
+        }
+        else if (BGMusic)
+        {
+            if (!BGSource.isPlaying)
+                BGSource.Play();
+
+            if (BGSource.volume != BGVolume)
+            {
+                BGSource.volume = BGVolume;
+            }
         }
 
         // Check if there was a change
-        if (SFXSource.volume != SFXVolume)
+        if (!SFXMusic)
+        {
+            if (SFXSource.isPlaying)
+                SFXSource.Pause();
+        }
+        else if (SFXSource.volume != SFXVolume)
         {
             SFXSource.volume = SFXVolume;
         }
@@ -121,12 +151,55 @@ public class SoundManager : MonoBehaviour
     }
     #endregion
 
+    #region Play Functions
     /// <summary>
     /// Plays a Bop Sound
     /// </summary>
     /// <param name="index"></param>
     public bool PlayBop(int index)
     {
+        // If the player disabled SFX music
+        if (!SFXMusic)
+        {
+            SFXSource.Pause();
+
+            return false;
+        }
+
+        // If the index passed in is more than the count for bop sounds 
+        // return
+        if (index >= bopClips.Count)
+            return false;
+
+        // Toggle looping off
+        if (SFXSource.loop)
+            SFXSource.loop = false;
+
+        // Check if theres any sounds playing
+        // if there is, pause it
+        if (SFXSource.isPlaying)
+            SFXSource.Pause();
+
+        // Change the clip
+        SFXSource.clip = bopClips[index];
+        // Play the clip
+        SFXSource.Play();
+
+        return true;
+    }
+
+    public bool PlayBop()
+    {
+        // If the player disabled SFX music
+        if (!SFXMusic)
+        {
+            SFXSource.Pause();
+
+            return false;
+        }
+
+        int index = Random.Range(0, bopClips.Count);
+
         // If the index passed in is more than the count for bop sounds 
         // return
         if (index >= bopClips.Count)
@@ -155,6 +228,11 @@ public class SoundManager : MonoBehaviour
     /// <param name="index"></param>
     public bool PlayAmbient(int index)
     {
+        if (!BGMusic)
+        {
+            BGSource.Pause();
+            return false;
+        }
         // if the index is more than the count for ambient sounds
         // return
         if (index >= ambientClips.Count)
@@ -169,6 +247,7 @@ public class SoundManager : MonoBehaviour
         BGSource.clip = ambientClips[index];
         // Play the clip
         BGSource.Play();
+        BGSource.loop = true;
         
         return true;
     }
@@ -180,6 +259,14 @@ public class SoundManager : MonoBehaviour
     /// <returns></returns>
     public bool PlayTap(int index)
     {
+        // If the player disabled SFX music
+        if (!SFXMusic)
+        {
+            SFXSource.Pause();
+
+            return false;
+        }
+
         // If the index is more than the count for tappign sounds
         // return
         if (index >= tappingClips.Count)
@@ -203,6 +290,14 @@ public class SoundManager : MonoBehaviour
 
     public bool PlayTap()
     {
+        // If the player disabled SFX music
+        if (!SFXMusic)
+        {
+            SFXSource.Pause();
+
+            return false;
+        }
+    
         int index = Random.Range(0, tappingClips.Count);
         // If the index is more than the count for tappign sounds
         // return
@@ -233,18 +328,32 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
-    public bool PlayShaking(int index)
+    public bool PlayShaking(bool playShakeSound = true, int index = 1)
     {
         // if the index is more than the count for shaking sounds
         // return
         if (index >= shakingClips.Count)
             return false;
 
-        if (SFXSource.isPlaying)
+        if (playShakeSound == false)
+        {
             SFXSource.Pause();
+            SFXSource.loop = false;
+            return false;
+        }
+
+        if (SFXSource.isPlaying)
+        {
+            if (SFXSource.clip != shakingClips[index])
+                SFXSource.Pause();
+            else
+                return false;
+        }
 
         // Set the clip
         SFXSource.clip = shakingClips[index];
+
+        SFXSource.loop = true;
 
         // Play
         SFXSource.Play();
@@ -253,5 +362,36 @@ public class SoundManager : MonoBehaviour
 
         return true;
     }
+    #endregion
 
+    IEnumerator LoadMusic(FileInfo musicFile)
+    {
+        if (musicFile.Name.Contains("meta"))
+        {
+            yield break;
+        }
+        else
+        {
+            string musicFilePath = musicFile.FullName.ToString();
+            string fileURL = string.Format("file://{0}", musicFilePath);
+            var www = new WWW(fileURL);
+            yield return www;
+            if (musicFile.Name.Contains("Ambient"))
+            {
+                ambientClips.Add(www.GetAudioClip(false, false));
+            }
+            else if (musicFile.Name.Contains("Bop"))
+            {
+                bopClips.Add(www.GetAudioClip(false, false));
+            }
+            else if (musicFile.Name.Contains("Shaking"))
+            {
+                shakingClips.Add(www.GetAudioClip(false, false));
+            }
+            else if (musicFile.Name.Contains("Tapping"))
+            {
+                tappingClips.Add(www.GetAudioClip(false, false));
+            }
+        }
+    }
 }
