@@ -976,5 +976,100 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: ambientClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: bopClips.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: tappingClips.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: shakingClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: ambientClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3cb2fe67d38d62d46acfc8cfdc201a9f, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: ambientClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 64034b93f9929b44796c7c7512911bc2, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: ambientClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: fdc1331193a22d24087e419d5dfb8cd6, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: bopClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 386141eeb3e94194588fa784df08f260, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: bopClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: d8dd28169d952b145b91c9bb2951be01, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: bopClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a8a9dfb80ff698c48a06c2fd1f5fb50d, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: bopClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: c26a0cb224629664dbeea6e52557afe4, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: bopClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5ead230e096d55044a78478b7088fed6, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: tappingClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: afe8226424558c343936beff2b7d964d, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: tappingClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 70ba4f188ef3f9c48bdde3fb1bf063e3, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: tappingClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a494732811e23644cae837c5c9f56bce, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: tappingClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: b19c46cf013c26940b3c007d1f07a45d, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: shakingClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: ff132a4376872c6409931a34c6a20a56, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: shakingClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f6ca98c64f14671498f75a8ada589f65, type: 3}
+    - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: shakingClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1d9bfa426be87614db7e1391dc84267e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da, type: 3}
