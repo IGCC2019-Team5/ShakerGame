@@ -37,8 +37,11 @@ public class BuildSystem : MonoBehaviour
     [SerializeField]
     private GameObject playerObject;
 
-    [SerializeField]
-    private  float maxBuildDist;
+    float rotation = 0;
+
+    //[SerializeField]
+    //private float maxBuildDist;
+    public BoxCollider2D maxBuildArea;
 
     //s public bool isMobile = false;
     private readonly bool moveAllowed = false;
@@ -85,7 +88,8 @@ public class BuildSystem : MonoBehaviour
             {
                 buildBlocked = false;
             }
-            if (Vector2.Distance(playerObject.transform.position, blockTemplate.transform.position) > maxBuildDist)
+            
+            if (!maxBuildArea.OverlapPoint(blockTemplate.transform.position))
             {
                 buildBlocked = true;
             }
@@ -130,8 +134,13 @@ public class BuildSystem : MonoBehaviour
             }
             if (Input.GetKeyDown("q"))
             {
+                Rotate();
+            }
 
-                blockTemplate.transform.Rotate(Vector3.forward * -90);
+            {
+                var angle = blockTemplate.transform.localEulerAngles;
+                angle.z = rotation;
+                blockTemplate.transform.localEulerAngles = angle;
             }
 
             //if (Input.GetMouseButtonDown(0))
@@ -156,6 +165,18 @@ public class BuildSystem : MonoBehaviour
         {
             OnPlace();
         }
+    }
+
+    public void Rotate()
+    {
+        rotation += 90f;
+        Rotate(rotation);
+    }
+
+    public void Rotate(float rotation)
+    {
+        foreach (var button in GameObject.FindObjectsOfType<ItemButton>())
+            button.Rotate(rotation);
     }
 
     public void OnNewBlock(GameObject newObject)
