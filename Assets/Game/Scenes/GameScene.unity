@@ -2142,6 +2142,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6052659087367633562, guid: 7f32d92198872774d981daf84d08a210,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 432202fe4c9a2a943bbad9ded75f84e8,
+        type: 3}
+    - target: {fileID: 6052659087367633562, guid: 7f32d92198872774d981daf84d08a210,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6052659087965064254, guid: 7f32d92198872774d981daf84d08a210, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7f32d92198872774d981daf84d08a210, type: 3}
@@ -4079,7 +4090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1783262094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5308,6 +5319,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
+    - target: {fileID: 980640921, guid: 84140c34836d6ee4299b099b1e26d036, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2288411485261927578, guid: 84140c34836d6ee4299b099b1e26d036,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5362,10 +5377,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 980640921, guid: 84140c34836d6ee4299b099b1e26d036, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84140c34836d6ee4299b099b1e26d036, type: 3}
