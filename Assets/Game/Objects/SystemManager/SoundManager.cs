@@ -61,7 +61,7 @@ public class SoundManager : MonoBehaviour
         //loadShaking();
         //loadTapping();
 
-        PlayAmbient(2);
+        PlayAmbient(1);
     }
 
     // Update is called once per frame
@@ -165,6 +165,40 @@ public class SoundManager : MonoBehaviour
 
             return false;
         }
+
+        // If the index passed in is more than the count for bop sounds 
+        // return
+        if (index >= bopClips.Count)
+            return false;
+
+        // Toggle looping off
+        if (SFXSource.loop)
+            SFXSource.loop = false;
+
+        // Check if theres any sounds playing
+        // if there is, pause it
+        if (SFXSource.isPlaying)
+            SFXSource.Pause();
+
+        // Change the clip
+        SFXSource.clip = bopClips[index];
+        // Play the clip
+        SFXSource.Play();
+
+        return true;
+    }
+
+    public bool PlayBop()
+    {
+        // If the player disabled SFX music
+        if (!SFXMusic)
+        {
+            SFXSource.Pause();
+
+            return false;
+        }
+
+        int index = Random.Range(0, bopClips.Count);
 
         // If the index passed in is more than the count for bop sounds 
         // return
@@ -294,18 +328,32 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     /// <param name="index"></param>
     /// <returns></returns>
-    public bool PlayShaking(int index)
+    public bool PlayShaking(bool playShakeSound = true, int index = 1)
     {
         // if the index is more than the count for shaking sounds
         // return
         if (index >= shakingClips.Count)
             return false;
 
-        if (SFXSource.isPlaying)
+        if (playShakeSound == false)
+        {
             SFXSource.Pause();
+            SFXSource.loop = false;
+            return false;
+        }
+
+        if (SFXSource.isPlaying)
+        {
+            if (SFXSource.clip != shakingClips[index])
+                SFXSource.Pause();
+            else
+                return false;
+        }
 
         // Set the clip
         SFXSource.clip = shakingClips[index];
+
+        SFXSource.loop = true;
 
         // Play
         SFXSource.Play();

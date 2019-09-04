@@ -18,9 +18,14 @@ public class GyroRecorder : MonoBehaviour
     void OnStateChanged(GameState oldState, GameState newState)
     {
         if (newState == GameState.RECORDING)
+        {
             manager.movie = new Shake.ShakeMovie();
+        }
         if (oldState == GameState.RECORDING)
+        {
+            SoundManager.sm_Instance.PlayShaking(false);
             manager.power = GyroCalculator.CalculatePower(manager.settings, manager.movie);
+        }
     }
 
     // Update is called once per frame
@@ -32,6 +37,8 @@ public class GyroRecorder : MonoBehaviour
         if (!SystemManager.isGyroEnabled)
             return;
 
+        
+
         // Check to make sure it is shaking time
         // if false, return because it is not time to shake
         // if true, start shaking
@@ -39,6 +46,17 @@ public class GyroRecorder : MonoBehaviour
             return;
 
         manager.elapsedTime += Time.fixedDeltaTime;
+
+        // Make sure its moving
+        if (SystemManager.gyroRef.userAcceleration.magnitude > 1)
+        {
+            SoundManager.sm_Instance.PlayShaking(true, 1);
+        }
+        else
+        {
+            SoundManager.sm_Instance.PlayShaking(false, 1);
+
+        }
 
         // Add the frames
         manager.movie.AddFrame(Shake.ShakeFrame.CreateFromGyro(SystemManager.gyroRef));
