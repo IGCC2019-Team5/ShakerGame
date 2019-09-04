@@ -59,37 +59,7 @@ public class BuildSystem : MonoBehaviour
         // If E key pressed, toggle build mode
         if (Input.GetKeyDown("e"))
         {
-            //Flip bool
-            buildModeOn = !buildModeOn;
-
-            //if we have a current template, destroy it
-            if (blockTemplate != null)
-            {
-                Destroy(blockTemplate);
-            }
-
-
-            //If we dont have a current block type set
-            if (currentBlock == null)
-            {
-                //Ensure allBlocks array is ready
-                if (blockSys.allBlocks[currentBlockID] != null)
-                {
-                    //Get a new currentBlock using the ID variable
-                    currentBlock = blockSys.allBlocks[currentBlockID];
-                }
-            }
-
-            if (buildModeOn)
-            {
-                //Create a new object for blockTemplate.
-                blockTemplate = new GameObject("CurrentBlockTemplate");
-                //Add and store reference to a SpriteRenderer on the template object
-                currentRend = blockTemplate.AddComponent<SpriteRenderer>();
-                //Set the sprite of the template object to match crrent block type
-                currentRend.sprite = currentBlock.blockSprite;
-                currentRend.sortingOrder = 1;
-            }
+            OnNewBlock(blockSys.blockTypes.blocks[currentBlockID]);
         }
 
         if (buildModeOn && blockTemplate != null)
@@ -163,27 +133,9 @@ public class BuildSystem : MonoBehaviour
                 blockTemplate.transform.Rotate(Vector3.forward * -90);
             }
 
-            if (Input.GetMouseButtonDown(0) && buildBlocked == false)
+            if (Input.GetMouseButtonDown(0))
             {
-                GameObject newBlock = new GameObject(currentBlock.blockName);
-                newBlock.transform.position = blockTemplate.transform.position;
-                newBlock.transform.rotation = blockTemplate.transform.rotation;
-                SpriteRenderer newRend = newBlock.AddComponent<SpriteRenderer>();
-                newRend.sprite = currentBlock.blockSprite;
-                newRend.sortingOrder = 1;
-
-                if (currentBlock.isSolid == true)
-                {
-                    newBlock.AddComponent<BoxCollider2D>();
-                    newBlock.layer = 9;
-                    newRend.sortingOrder = 1;
-                }
-                else
-                {
-                    newBlock.AddComponent<BoxCollider2D>();
-                    newBlock.layer = 10;
-                    newRend.sortingOrder = 1;
-                }
+                OnPlace();
             }
 
             if (Input.GetMouseButtonDown(1) && blockTemplate != null)
@@ -199,7 +151,13 @@ public class BuildSystem : MonoBehaviour
         }
     }
 
-    public void OnNewBlock(int id)
+    [System.Obsolete]
+    public void OnNewObject(int id)
+    {
+        OnNewBlock(blockSys.blockTypes.blocks[id]);
+    }
+
+    public void OnNewBlock(GameObject newObject)
     {
         //Flip bool
         buildModeOn = !buildModeOn;
@@ -213,12 +171,41 @@ public class BuildSystem : MonoBehaviour
         if (buildModeOn)
         {
             //Create a new object for blockTemplate.
-            blockTemplate = Instantiate(blockSys.blockTypes.blocks[id]);
+            blockTemplate = Instantiate(newObject);
             blockTemplate.name = "CurrentBlockTemplate";
             //Add and store reference to a SpriteRenderer on the template object
             currentRend = blockTemplate.GetComponent<SpriteRenderer>();
             currentRend.sortingOrder = 1;
             currentBlock = blockTemplate.GetComponent<BlockInfo>().info;
+        }
+    }
+
+    public void OnPlace()
+    {
+        //Flip bool
+        buildModeOn = !buildModeOn;
+
+        if (buildBlocked == false)
+        {
+            GameObject newBlock = new GameObject(currentBlock.blockName);
+            newBlock.transform.position = blockTemplate.transform.position;
+            newBlock.transform.rotation = blockTemplate.transform.rotation;
+            SpriteRenderer newRend = newBlock.AddComponent<SpriteRenderer>();
+            newRend.sprite = currentBlock.blockSprite;
+            newRend.sortingOrder = 1;
+
+            if (currentBlock.isSolid == true)
+            {
+                newBlock.AddComponent<BoxCollider2D>();
+                newBlock.layer = 9;
+                newRend.sortingOrder = 1;
+            }
+            else
+            {
+                newBlock.AddComponent<BoxCollider2D>();
+                newBlock.layer = 10;
+                newRend.sortingOrder = 1;
+            }
         }
     }
 }
