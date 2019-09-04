@@ -9,6 +9,11 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager sm_Instance;
 
+    [System.NonSerialized] public bool BGMusic = true;
+    [System.NonSerialized] public bool SFXMusic = true;
+    [System.NonSerialized] public float BGVolume = 1.0f;
+    [System.NonSerialized] public float SFXVolume = 1.0f;
+
     // Created 4 separated lists because the function calling handles the playing
     // I could create a struct that stores the clip and type of clip
     // and make One List only instead of Four Lists.
@@ -48,7 +53,17 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Check if there was a change
+        if (BGSource.volume != BGVolume)
+        {
+            BGSource.volume = BGVolume;
+        }
+
+        // Check if there was a change
+        if (SFXSource.volume != SFXVolume)
+        {
+            SFXSource.volume = SFXVolume;
+        }
     }
 
  #region Loading Functions
