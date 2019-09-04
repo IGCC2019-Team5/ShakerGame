@@ -2146,7 +2146,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 432202fe4c9a2a943bbad9ded75f84e8,
+      objectReference: {fileID: 21300000, guid: d5e35a80c2981614baa4abde6f4def50,
         type: 3}
     - target: {fileID: 6052659087367633562, guid: 7f32d92198872774d981daf84d08a210,
         type: 3}
@@ -4090,7 +4090,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1783262094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5510,7 +5510,7 @@ PrefabInstance:
     - target: {fileID: 2418240348324178116, guid: e2bb9bec0fcbc7041a0ada116a152542,
         type: 3}
       propertyPath: maxTime
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2bb9bec0fcbc7041a0ada116a152542, type: 3}
