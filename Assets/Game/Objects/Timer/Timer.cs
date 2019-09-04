@@ -12,6 +12,8 @@ public class Timer : MonoBehaviour
     public Text timer;
     private GameManager manager;
 
+    public bool countUp;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -23,8 +25,11 @@ public class Timer : MonoBehaviour
     {
         if (manager.state == workState)
         {
-            timeLeft += Time.deltaTime;
-            timer.text = $"{maxTime - timeLeft}";
+            if (countUp)
+                timeLeft -= Time.deltaTime;
+            else
+                timeLeft += Time.deltaTime;
+            timer.text = $"{(maxTime - timeLeft).ToString("F0")}";
             if (stateChangeFeatureEnabled)
             {
                 if (timeLeft > maxTime)

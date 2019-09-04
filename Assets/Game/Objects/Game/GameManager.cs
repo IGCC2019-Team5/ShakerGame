@@ -4,12 +4,12 @@ using UnityEngine;
 
 public enum GameState
 {
-    
-    INIT,
-    BUILDING,
-    RECORDING,
-    PLAYING,
-    FINISHED,
+    /* 1 */ INIT,
+    /* 2 */ BUILDING,
+    /* 4 */ RECORDING,
+    /* 5 */ PLAYING,
+    /* 6 */ FINISHED,
+    /* 3 */ WATING,
 }
 
 public class GameManager : MonoBehaviour
