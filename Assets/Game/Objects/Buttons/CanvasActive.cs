@@ -58,7 +58,7 @@ public class CanvasActive : MonoBehaviour
             ChangeBGSize.instance.ZoomInBG();
         }
 
-        if (oldState == GameState.BUILDING)//Next State
+        if (oldState == GameState.RECORDING)//Next State
         {
             ShakeCanvas();
             ChangeBGSize.instance.ZoomOutBG();
