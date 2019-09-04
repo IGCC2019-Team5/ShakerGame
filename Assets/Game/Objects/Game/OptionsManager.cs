@@ -83,6 +83,9 @@ public class OptionsManager : MonoBehaviour
             // Change the text
             BGMusicButton.GetComponentInChildren<Text>().text = "ON";
         }
+
+        // Play tap sound
+        soundInstance.PlayTap();
     }
 
     public void ToggleSFXMusic()
@@ -102,5 +105,9 @@ public class OptionsManager : MonoBehaviour
             soundInstance.SFXMusic = true;
             SFXMusicButton.GetComponentInChildren<Text>().text = "ON";
         }
+
+        // Play tap sound
+        soundInstance.PlayTap();
+
     }
 }
