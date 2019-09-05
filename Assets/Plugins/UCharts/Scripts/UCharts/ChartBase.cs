@@ -8,22 +8,36 @@ namespace UCharts
 	public class ChartBase : MaskableGraphic, ILayoutElement, ICanvasRaycastFilter
 	{
 
-		protected UIVertex[] SetVbo(Vector2[] vertices, Vector2[] uvs, Color32 color)
-		{
-			UIVertex[] vbo = new UIVertex[4];
-			for (int i = 0; i < vertices.Length; i++)
-			{
-				var vert = UIVertex.simpleVert;
-				vert.color = color;
-				vert.position = vertices[i];
-				vert.uv0 = uvs[i];
-				vbo[i] = vert;
-			}
-			return vbo;
-		}
+        protected UIVertex[] SetVbo(Vector2[] vertices, Vector2[] uvs, Color32 color)
+        {
+            UIVertex[] vbo = new UIVertex[4];
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                var vert = UIVertex.simpleVert;
+                vert.color = color;
+                vert.position = vertices[i];
+                vert.uv0 = uvs[i];
+                vbo[i] = vert;
+            }
+            return vbo;
+        }
 
-		#region ILayoutElement Interface
-		public virtual void CalculateLayoutInputHorizontal() { }
+        protected UIVertex[] SetVbo(Vector2[] vertices, Vector2[] uvs, Color32[] colors)
+        {
+            UIVertex[] vbo = new UIVertex[4];
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                var vert = UIVertex.simpleVert;
+                vert.color = colors[i];
+                vert.position = vertices[i];
+                vert.uv0 = uvs[i];
+                vbo[i] = vert;
+            }
+            return vbo;
+        }
+
+        #region ILayoutElement Interface
+        public virtual void CalculateLayoutInputHorizontal() { }
 		public virtual void CalculateLayoutInputVertical() { }
 
 		public virtual float minWidth { get { return 0; } }

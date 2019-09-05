@@ -236,7 +236,8 @@ public class BuildSystem : MonoBehaviour
             currentRend.sortingOrder = 1;
             currentBlock = blockTemplate.GetComponent<BlockInfo>().info;
 
-            SoundManager.sm_Instance.PlayTap();
+            if (SoundManager.sm_Instance != null)
+                SoundManager.sm_Instance.PlayTap();
         }
     }
 
@@ -259,7 +260,8 @@ public class BuildSystem : MonoBehaviour
                 SpriteRenderer newRend = newBlock.GetComponent<SpriteRenderer>();
                 newRend.sortingOrder = 1;
 
-                SoundManager.sm_Instance.PlayBop();
+                if (SoundManager.sm_Instance != null)
+                    SoundManager.sm_Instance.PlayBop();
 
                 if (currentBlock.isSolid == true)
                 {

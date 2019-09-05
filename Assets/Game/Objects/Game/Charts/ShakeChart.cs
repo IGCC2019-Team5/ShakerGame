@@ -20,6 +20,13 @@ public class ShakeChart : MonoBehaviour
                 shakePower.rotZ.power * settings.chartMultiplier,
                 0
             };
-        chart.ApplyData(data, immediately);
+        var colorA = new Color32(244, 12, 12, 100);
+        var colorB = new Color32(244, 244, 12, 100);
+        List<Color32> color = new List<Color32>() {
+                Color.Lerp(colorA, colorB, shakePower.y.freq * settings.rotationFreqMultiplier),
+                Color.Lerp(colorA, colorB, shakePower.x.freq * settings.rotationFreqMultiplier),
+                Color.Lerp(colorA, colorB, shakePower.rotZ.freq * settings.rotationFreqMultiplier),
+            };
+        chart.ApplyData(data, color, immediately);
     }
 }

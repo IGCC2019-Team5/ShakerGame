@@ -20,6 +20,7 @@ MonoBehaviour:
   xMultiplier: 1
   yMultiplier: 1
   chartMultiplier: 1
-  xPowerMultiplier: 12
-  yPowerMultiplier: 12
-  rotationPowerMultiplier: 24
+  xPowerMultiplier: 4
+  yPowerMultiplier: 4
+  rotationPowerMultiplier: 8
+  rotationFreqMultiplier: 0.25

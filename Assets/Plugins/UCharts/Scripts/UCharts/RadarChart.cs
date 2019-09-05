@@ -22,8 +22,9 @@ namespace UCharts
 		[SerializeField] private Color32 m_Color0, m_Color1, m_BorderColor;
 
 		[SerializeField] List<RadarChartIndicator> m_Indicators = new List<RadarChartIndicator>();
-		[SerializeField] List<float> m_Data = new List<float>();
-	    private GameObject m_TextProto;
+        [SerializeField] List<float> m_Data = new List<float>();
+        [SerializeField] List<Color32> m_DataColors = new List<Color32>();
+        private GameObject m_TextProto;
 		private bool m_PlayAnimation;
 		private float m_PlayAnimationTimestamp;
 		private List<float> m_DataDisplay = new List<float>();
@@ -66,9 +67,10 @@ namespace UCharts
 			}
         }
 
-        public void ApplyData(List<float> data, bool immediately = false)
+        public void ApplyData(List<float> data, List<Color32> colors, bool immediately = false)
         {
             m_Data = data;
+            m_DataColors = colors;
             if (immediately)
             {
                 for (var i = 0; i < m_DataDisplay.Count; ++i)
@@ -248,9 +250,12 @@ namespace UCharts
 				uv3 = new Vector2(0, 0);
 				pos0 = prevX;
 				var index = i % (vertices - 1);
-				var value = index < m_Data.Count - 1 ? m_Data[index] : 0;
+				var value = index < m_Data.Count ? m_Data[index] : 0;
+                var color1 = index < m_DataColors.Count ? m_DataColors[index] : new Color32(244, 12, 12, 100);
+                var index2 = (i + vertices - 2) % (vertices - 1);
+                var color2 = index2 < m_DataColors.Count ? m_DataColors[index2] : new Color32(244, 12, 12, 100);
 
-				if (m_PlayAnimation)
+                if (m_PlayAnimation)
 				{
 					value = index < m_DataDisplay.Count - 1 ? m_DataDisplay[index] : 0;
 				}
@@ -265,7 +270,7 @@ namespace UCharts
 				// draw fill color
 				vh.AddUIVertexQuad(
 					SetVbo(new[] { pos0, pos1, center, center }, 
-							new[] { uv0, uv1, uv2, uv3 }, new Color32(244, 12, 12, 100))
+							new[] { uv0, uv1, uv2, uv3 }, new Color32[] { color2, color1, Color.Lerp(color1, color2, .5f), Color.Lerp(color1, color2, .5f) })
 				);
 
 				// draw borders
