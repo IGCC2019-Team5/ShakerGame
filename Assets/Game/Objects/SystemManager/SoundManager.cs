@@ -364,6 +364,7 @@ public class SoundManager : MonoBehaviour
     }
     #endregion
 
+    [System.Obsolete]
     IEnumerator LoadMusic(FileInfo musicFile)
     {
         if (musicFile.Name.Contains("meta"))

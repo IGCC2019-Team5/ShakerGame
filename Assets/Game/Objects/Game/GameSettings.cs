@@ -24,4 +24,6 @@ public class GameSettings : ScriptableObject
     public float xPowerMultiplier = 4f;
     public float yPowerMultiplier = 4f;
     public float rotationPowerMultiplier = 4f;
+
+    public float rotationFreqMultiplier = .25f;
 }

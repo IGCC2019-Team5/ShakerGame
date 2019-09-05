@@ -48,15 +48,16 @@ public class GyroRecorder : MonoBehaviour
         manager.elapsedTime += Time.fixedDeltaTime;
 
         // Make sure its moving
-        if (SystemManager.gyroRef.userAcceleration.magnitude > 1)
-        {
-            SoundManager.sm_Instance.PlayShaking(true, 1);
-        }
-        else
-        {
-            SoundManager.sm_Instance.PlayShaking(false, 1);
+        if (SoundManager.sm_Instance != null)
+            if (SystemManager.gyroRef.userAcceleration.magnitude > 1)
+            {
+                SoundManager.sm_Instance.PlayShaking(true, 1);
+            }
+            else
+            {
+                SoundManager.sm_Instance.PlayShaking(false, 1);
 
-        }
+            }
 
         // Add the frames
         manager.movie.AddFrame(Shake.ShakeFrame.CreateFromGyro(SystemManager.gyroRef));

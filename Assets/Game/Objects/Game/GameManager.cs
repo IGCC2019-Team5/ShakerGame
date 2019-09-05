@@ -50,7 +50,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         state = GameState.BUILDING;
-        SoundManager.sm_Instance.PlayAmbient(2);
+        if (SoundManager.sm_Instance != null)
+            SoundManager.sm_Instance.PlayAmbient(2);
         yield break;
     }
 

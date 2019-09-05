@@ -35,7 +35,9 @@ namespace Shake
     [System.Serializable]
     public struct ShakeWave
     {
-        public float freq;
+        public float time;
+        public int count;
+        public float freq { get { return count / time; } }
         public float power;
     }
 
@@ -50,20 +52,6 @@ namespace Shake
             this.x = x;
             this.y = y;
             this.rotZ = rotZ;
-        }
-
-        public ShakePower(float _xPower, float _yPower, float _zRot, float _frequency)
-        {
-            this.x = new ShakeWave() { power = _xPower, freq = _frequency };
-            this.y = new ShakeWave() { power = _yPower, freq = _frequency };
-            this.rotZ = new ShakeWave() { power = _zRot, freq = _frequency };
-        }
-
-        public ShakePower(float _xPower, float _yPower, float _zRot, float _xFrequency, float _yFrequency, float _zRotFrequency)
-        {
-            this.x = new ShakeWave() { power = _xPower, freq = _xFrequency };
-            this.y = new ShakeWave() { power = _yPower, freq = _yFrequency };
-            this.rotZ = new ShakeWave() { power = _zRot, freq = _zRotFrequency };
         }
     }
 }
