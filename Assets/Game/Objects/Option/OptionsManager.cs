@@ -18,8 +18,10 @@ public class OptionsManager : MonoBehaviour
         soundInstance = SoundManager.sm_Instance;
 
         // Set the initial slider values
-        SFXSlider.GetComponent<Slider>().value = soundInstance.SFXVolume;
-        BGSlider.GetComponent<Slider>().value = soundInstance.BGVolume;
+        if (SFXSlider != null)
+            SFXSlider.GetComponent<Slider>().value = soundInstance.SFXVolume;
+        if (BGSlider != null)
+            BGSlider.GetComponent<Slider>().value = soundInstance.BGVolume;
 
         // Set up the starting buttons
         // If it is true when toggled
@@ -60,9 +62,11 @@ public class OptionsManager : MonoBehaviour
     void Update()
     {
         // Set the SFX volume in sound manager to the slider value
-        soundInstance.SFXVolume = SFXSlider.GetComponent<Slider>().value;
+        if (SFXSlider != null)
+            soundInstance.SFXVolume = SFXSlider.GetComponent<Slider>().value;
         // Set the BG volume in the sound manager to the slider value
-        soundInstance.BGVolume = BGSlider.GetComponent<Slider>().value;
+        if (BGSlider != null)
+         soundInstance.BGVolume = BGSlider.GetComponent<Slider>().value;
     }
 
     public void ToggleBGMusic()

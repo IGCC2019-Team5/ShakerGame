@@ -358,9 +358,42 @@ public class SoundManager : MonoBehaviour
         // Play
         SFXSource.Play();
 
-        SFXSource.loop = true;
-
         return true;
+    }
+
+    public void PlayMenuShake()
+    {
+        int index = 1;
+        // if the index is more than the count for shaking sounds
+        // return
+        if (index >= shakingClips.Count)
+            return;
+
+        //if (playShakeSound == false)
+        //{
+        //    SFXSource.Pause();
+        //    SFXSource.loop = false;
+        //    return false;
+        //}
+
+        if (SFXSource.isPlaying)
+        {
+            if (SFXSource.clip != shakingClips[index])
+                SFXSource.Pause();
+            else
+                return;
+        }
+
+        // Set the clip
+        SFXSource.clip = shakingClips[index];
+
+        //SFXSource.loop = true;
+
+        // Play
+        SFXSource.Play();
+
+        return;
+
     }
     #endregion
 

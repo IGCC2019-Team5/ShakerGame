@@ -541,6 +541,17 @@ MonoBehaviour:
           m_StringArgument: Shake
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2917053740477951148}
+        m_MethodName: PlayMenuShake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   shakeMagnitude: 1
@@ -1059,7 +1070,7 @@ PrefabInstance:
     - target: {fileID: 2917053738650273540, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
         type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2917053738650273542, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
         type: 3}
@@ -1129,7 +1140,7 @@ PrefabInstance:
     - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
         type: 3}
       propertyPath: tappingClips.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
         type: 3}
@@ -1180,7 +1191,7 @@ PrefabInstance:
         type: 3}
       propertyPath: tappingClips.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: afe8226424558c343936beff2b7d964d, type: 3}
+      objectReference: {fileID: 8300000, guid: a494732811e23644cae837c5c9f56bce, type: 3}
     - target: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
         type: 3}
       propertyPath: tappingClips.Array.data[1]
@@ -1211,5 +1222,22 @@ PrefabInstance:
       propertyPath: shakingClips.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 1d9bfa426be87614db7e1391dc84267e, type: 3}
+    - target: {fileID: 2917053738650273541, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da, type: 3}
+--- !u!114 &2917053740477951148 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2917053738650273543, guid: 6c8b4e55d6c5a8c4c9adcffd7f88e5da,
+    type: 3}
+  m_PrefabInstance: {fileID: 2917053740477951147}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab95a5d7da9b3f478aa7f8fab5cdbd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
