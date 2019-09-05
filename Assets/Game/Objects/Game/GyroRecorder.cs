@@ -23,7 +23,8 @@ public class GyroRecorder : MonoBehaviour
         }
         if (oldState == GameState.RECORDING)
         {
-            SoundManager.sm_Instance.PlayShaking(false);
+            if (SoundManager.sm_Instance != null)
+                SoundManager.sm_Instance.PlayShaking(false);
             manager.power = GyroCalculator.CalculatePower(manager.settings, manager.movie);
         }
     }

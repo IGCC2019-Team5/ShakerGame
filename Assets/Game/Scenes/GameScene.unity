@@ -1501,13 +1501,16 @@ MonoBehaviour:
   _state: 0
   power:
     x:
-      freq: 0
+      time: 0
+      count: 0
       power: 0
     y:
-      freq: 0
+      time: 0
+      count: 0
       power: 0
     rotZ:
-      freq: 0
+      time: 0
+      count: 0
       power: 0
   chart: {fileID: 1597244953}
 --- !u!114 &710726350
@@ -1894,7 +1897,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &785979034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3575,12 +3578,12 @@ PrefabInstance:
     - target: {fileID: 224453453742311250, guid: 6e971bf8ca9fc411f9c5e3143f837319,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -291.2
+      value: -291.25
       objectReference: {fileID: 0}
     - target: {fileID: 224453453742311250, guid: 6e971bf8ca9fc411f9c5e3143f837319,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -307.2
+      value: -307.25
       objectReference: {fileID: 0}
     - target: {fileID: 224453453742311250, guid: 6e971bf8ca9fc411f9c5e3143f837319,
         type: 3}
@@ -4539,7 +4542,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
